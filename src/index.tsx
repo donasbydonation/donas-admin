@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from "react-router-dom";
 import App from './App';
-import Header from './components/Header';
 import './style/global.css';
 import './style/reset.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +12,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <Header />
-        <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </React.StrictMode>
 );

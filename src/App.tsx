@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { Routes, Route } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
+import Header from './components/Header';
 
 const StyledApp = styled.div`
     padding-top: 40px;
@@ -8,7 +10,10 @@ const StyledApp = styled.div`
 export default function App() {
     return (
         <StyledApp>
-            <LoginPage />
+            <Header />
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+            </Routes>
         </StyledApp>
     );
 }

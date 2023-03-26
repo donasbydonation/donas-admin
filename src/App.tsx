@@ -1,11 +1,19 @@
-import React from 'react';
+import styled from 'styled-components';
+import { RecoilRoot } from 'recoil';
+import Header from '@/components/Header';
+import AppRoute from '@/routes';
 
-function App() {
+const StyledApp = styled.div`
+    padding-top: 40px;
+`;
+
+export default function App() {
     return (
-        <div>
-            init: Donas admin page (signed-by: haeram.kim1@gmail.com)
-        </div>
+        <StyledApp>
+            <RecoilRoot>
+                <Header />
+                <AppRoute />
+            </RecoilRoot>
+        </StyledApp>
     );
 }
-
-export default App;

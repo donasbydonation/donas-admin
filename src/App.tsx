@@ -1,11 +1,14 @@
-import React from 'react';
+import styled from 'styled-components';
+import LoginPage from './pages/LoginPage';
 
-function App() {
+const StyledApp = styled.div`
+    padding-top: 40px;
+`;
+
+export default function App() {
     return (
-        <div>
-            init: Donas admin page (signed-by: haeram.kim1@gmail.com)
-        </div>
+        <StyledApp>
+            <LoginPage />
+        </StyledApp>
     );
 }
-
-export default App;

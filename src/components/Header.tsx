@@ -10,7 +10,7 @@ export default function Header() {
     return (
         <StyledNavbar variant="light" fixed="top">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img
                         alt="donas-logo"
                         src="/images/logo.png"

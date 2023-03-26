@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { Routes, Route } from "react-router-dom";
-import LoginPage from '@/pages/LoginPage';
-import Header from '@/components/Header';
 import { RecoilRoot } from 'recoil';
+import Header from '@/components/Header';
+import AppRoute from '@/routes';
 
 const StyledApp = styled.div`
     padding-top: 40px;
@@ -13,9 +12,7 @@ export default function App() {
         <StyledApp>
             <RecoilRoot>
                 <Header />
-                <Routes>
-                    <Route path="/" element={<LoginPage />} />
-                </Routes>
+                <AppRoute />
             </RecoilRoot>
         </StyledApp>
     );

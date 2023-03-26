@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 import { loginFN } from '@/utils/auth'
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
@@ -19,17 +20,22 @@ const StyledForm = styled(Form)`
 `;
 
 export default function LoginPage() {
-    const [token, setToken] = useRecoilState(tokenState);
+    const navigate = useNavigate();
+    const [, setToken] = useRecoilState(tokenState);
 
     const handleSubmit = (e: FormEvent<HTMLButtonElement>)  => {
         e.preventDefault();
+
         loginFN({
             id: (document.getElementById("login-id") as HTMLInputElement).value,
             pw: (document.getElementById("login-pw") as HTMLInputElement).value,
         }).then(body => {
+            ////
             // TODO: set token to recoil
             console.log(body);
             setToken("TEST_TOKEN");
+            ////
+            navigate("/");
         });
     }
 

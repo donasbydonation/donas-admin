@@ -66,5 +66,5 @@ jobs:
             --deployment-group-name $AWS_CODEDEPLOY_DEPLOY_GROUP_NAME \
             --file-exists-behavior OVERWRITE \
             --deployment-config-name CodeDeployDefault.OneAtATime \
-            --s3-location bucket=$AWS_S3_BUCKET_NAME,bundleType=tgz,key=$AWS_S3_BUCKET_PATH/$APP_COMPONENT_NAME/$GITHUB_SHA.tgz\
+            --s3-location bucket=$AWS_S3_BUCKET_NAME,bundleType=tgz,key=$AWS_S3_BUCKET_PATH/$APP_COMPONENT_NAME/$GITHUB_SHA.tgz \
             --no-paginate

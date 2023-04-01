@@ -13,6 +13,7 @@ const StyledPage = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 `;
 
 const StyledForm = styled(Form)`
@@ -40,7 +41,7 @@ export default function LoginPage() {
     }
 
     return (
-        <StyledPage className="h-full">
+        <StyledPage>
             <Card>
                 <Card.Body>
                     <Card.Title>Administrator Log In</Card.Title>

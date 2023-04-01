@@ -3,7 +3,7 @@ name: CICD for main branch
 on:
   push:
     branches:
-      - "feat/cicd-pipeline"
+      - "main"
 
 env:
   APP_COMPONENT_NAME: "admin-console"

@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /etc/donas/app/admin-console
+    overwrite: yes
+hooks:
+  ApplicationStop:
+    - location: aws/scripts/application_stop.sh
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: aws/scripts/before_install.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: aws/scripts/application_start.sh
+      timeout: 300
+      runas: root

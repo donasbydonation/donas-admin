@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import AppRoute from '@/routes';
 
 const StyledApp = styled.div`
-    padding-top: 40px;
+    padding-top: 50px;
 `;
 
 export default function App() {

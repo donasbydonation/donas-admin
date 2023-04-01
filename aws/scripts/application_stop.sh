@@ -1,2 +1,2 @@
 #!/bin/bash
-/etc/donas/application_stop.sh
+/etc/donas/app/application_stop.sh

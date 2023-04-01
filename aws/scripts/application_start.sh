@@ -1,2 +1,2 @@
 #!/bin/bash
-/etc/donas/application_start.sh
+/etc/donas/app/application_start.sh

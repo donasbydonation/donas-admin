@@ -1,1 +1,1 @@
-export * from './loginFN';
+export * from './login';

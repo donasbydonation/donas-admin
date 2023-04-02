@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
-import { loginFN } from './api';
+import * as apiCall from './api';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
 
@@ -27,7 +27,7 @@ export default function LoginPage() {
     const handleSubmit = (e: FormEvent<HTMLButtonElement>)  => {
         e.preventDefault();
 
-        loginFN({
+        apiCall.login({
             id: (document.getElementById("login-id") as HTMLInputElement).value,
             pw: (document.getElementById("login-pw") as HTMLInputElement).value,
         }).then(body => {

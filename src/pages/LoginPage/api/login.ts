@@ -10,6 +10,6 @@ export type LoginResponseDTO = {
     refreshToken: string,
 };
 
-export function loginFN(data: LoginRequestDto): Promise<LoginResponseDTO> {
+export function login(data: LoginRequestDto): Promise<LoginResponseDTO> {
     return axios.post(apiConfig.apis.post.login, data);
 }

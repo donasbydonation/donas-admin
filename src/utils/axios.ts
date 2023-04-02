@@ -1,5 +1,18 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios';
 
+export const apiConfig = {
+    baseURL: "https://donas.me",
+    apis: {
+        get: {},
+        post: {
+            login: "/api/v1/login",
+        },
+    },
+};
+export const axios = Axios.create({
+    baseURL: apiConfig.baseURL,
+});
+
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   const token = ""; // TODO: token handling
   if (token) {
@@ -8,10 +21,6 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   config.headers.Accept = 'application/json';
   return config;
 }
-
-export const axios = Axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com", // TODO: api calling
-});
 
 axios.interceptors.request.use(authRequestInterceptor);
 
@@ -26,3 +35,4 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+

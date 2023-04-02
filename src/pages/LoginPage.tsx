@@ -35,6 +35,7 @@ export default function LoginPage() {
             // TODO: set token to recoil
             console.log(body);
             setToken("TEST_TOKEN");
+            //
             ////
             navigate("/");
         });
@@ -44,29 +45,25 @@ export default function LoginPage() {
         <StyledPage>
             <Card>
                 <Card.Body>
-                    <Card.Title>Administrator Log In</Card.Title>
+                    <Card.Title>관리자 로그인</Card.Title>
                     <StyledForm onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="login-id">
-                            <Form.Label>ID</Form.Label>
+                            <Form.Label>아이디</Form.Label>
                             <Form.Control
                                 required
                                 type="text"
                                 placeholder="Enter ID"
                             />
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="login-pw">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>비밀번호</Form.Label>
                             <Form.Control
                                 required
                                 type="password"
                                 placeholder="Enter Password"
                             />
                         </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Log in
-                        </Button>
+                        <Button variant="primary" type="submit">로그인</Button>
                     </StyledForm>
                 </Card.Body>
             </Card>

@@ -51,18 +51,18 @@ export default function Dashboard(props: {eventKey: string}) {
                         <Card>
                             <Card.Header>Menu</Card.Header>
                             <ListGroup variant="flush">
-                                <ListItem href="/creator">크리에이터 관리</ListItem>
                                 <ListItem href="/schedule">스케줄 관리</ListItem>
+                                <ListItem href="/creator">크리에이터 관리</ListItem>
                             </ListGroup>
                         </Card>
                     </Col>
                     <Col sm={10}>
                         <Tab.Content>
-                            <TabPane eventKey="/creator">
-                                <Creator />
-                            </TabPane>
                             <TabPane eventKey="/schedule">
                                 <Schedule />
+                            </TabPane>
+                            <TabPane eventKey="/creator">
+                                <Creator />
                             </TabPane>
                         </Tab.Content>
                     </Col>

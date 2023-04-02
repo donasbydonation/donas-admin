@@ -12,9 +12,9 @@ export default function AppRoutes() {
     ];
 
     const protectedRoutes = [
-        { path: "/", element: <Dashboard eventKey="/creator" /> },
-        { path: "/creator", element: <Dashboard eventKey="/creator" /> },
+        { path: "/", element: <Dashboard eventKey="/schedule" /> },
         { path: "/schedule", element: <Dashboard eventKey="/schedule" /> },
+        { path: "/creator", element: <Dashboard eventKey="/creator" /> },
     ];
 
     const publicRoutes = [

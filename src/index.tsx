@@ -5,6 +5,7 @@ import App from '@/App';
 import '@/style/global.css';
 import '@/style/reset.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@/plugins/api-mock';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

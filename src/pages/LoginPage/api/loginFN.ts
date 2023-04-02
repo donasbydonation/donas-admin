@@ -1,10 +1,15 @@
-import { axios } from '@/utils/axios';
+import { axios, apiConfig } from '@/utils/axios';
 
-export type AuthDTO = {
+export type LoginRequestDto = {
     id: string,
     pw: string,
 };
 
-export function loginFN(data: AuthDTO) {
-    return axios.post("/posts", data);
+export type LoginResponseDTO = {
+    accessToken: string,
+    refreshToken: string,
+};
+
+export function loginFN(data: LoginRequestDto): Promise<LoginResponseDTO> {
+    return axios.post(apiConfig.apis.post.login, data);
 }

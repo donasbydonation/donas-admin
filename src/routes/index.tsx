@@ -21,7 +21,7 @@ export default function AppRoutes() {
         { path: "*", element: <Navigate to="/login" /> },
     ];
 
-    const routes = token ? protectedRoutes : publicRoutes;
+    const routes = token.access ? protectedRoutes : publicRoutes;
 
     const element = useRoutes([...routes, ...commonRoutes]);
 

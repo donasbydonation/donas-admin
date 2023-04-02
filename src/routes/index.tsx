@@ -2,6 +2,7 @@ import { useRoutes, Navigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
 import LoginPage from '@/pages/LoginPage';
+import Dashboard from '@/pages/Dashboard';
 
 export default function AppRoutes() {
     const [token] = useRecoilState(tokenState);
@@ -11,7 +12,9 @@ export default function AppRoutes() {
     ];
 
     const protectedRoutes = [
-        { path: "/", element: <div>TODO: main page</div> },
+        { path: "/", element: <Dashboard /> },
+        { path: "/creator", element: <Dashboard /> },
+        { path: "/schedule", element: <Dashboard /> },
     ];
 
     const publicRoutes = [

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
-import { loginFN } from '@/utils/auth'
+import { loginFN } from './api';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
 

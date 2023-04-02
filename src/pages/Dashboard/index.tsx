@@ -4,43 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from 'react-router-dom';
-import { ReactNode } from 'react';
 import Creator from '@/pages/Creator';
 import Schedule from '@/pages/Schedule';
+import { ListItem, TabPane } from './components';
 
 const StyledContainer = styled.div`
     background-color: #FFE6EB;
     padding: 0.75rem;
 `;
-
-function ListItem(props: {href: string, children: ReactNode}) {
-    const navigate = useNavigate();
-
-    const onClickHandler = () => {
-        navigate(props.href);
-    };
-
-    return (
-        <ListGroup.Item
-            action
-            eventKey={props.href}
-            onClick={onClickHandler}
-        >
-            {props.children}
-        </ListGroup.Item>
-    );
-}
-
-function TabPane(props: {eventKey: string, children: ReactNode}) {
-    return (
-        <Tab.Pane eventKey={props.eventKey} transition={false}>
-            <Card>
-                {props.children}
-            </Card>
-        </Tab.Pane>
-    );
-}
 
 export default function Dashboard(props: {eventKey: string}) {
     return (

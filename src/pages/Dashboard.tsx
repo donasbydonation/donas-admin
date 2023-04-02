@@ -4,83 +4,70 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from 'react-router-dom';
 import { ReactNode } from 'react';
+import Creator from '@/pages/Creator';
+import Schedule from '@/pages/Schedule';
 
 const StyledContainer = styled.div`
-    height: 100%;
+    background-color: #FFE6EB;
     padding: 0.75rem;
 `;
 
-const StyledSidebar = styled(StyledContainer)`
-    background-color: #FFE6EB;
-`;
-
-const StyledContent = styled(StyledContainer)`
-    background-color: #FFFFFF;
-`;
-
-function NavItem(props: {href: string, children: ReactNode}) {
+function ListItem(props: {href: string, children: ReactNode}) {
     const navigate = useNavigate();
 
-    const onClickHandler = (href: string) => {
-        return () => {
-            navigate(href);
-        };
+    const onClickHandler = () => {
+        navigate(props.href);
     };
 
     return (
-        <Nav.Item>
-            <Nav.Link
-                eventKey={props.href}
-                onClick={onClickHandler(props.href)}
-            >
-                {props.children}
-            </Nav.Link>
-        </Nav.Item>
+        <ListGroup.Item
+            action
+            eventKey={props.href}
+            onClick={onClickHandler}
+        >
+            {props.children}
+        </ListGroup.Item>
     );
 }
 
-export default function Dashboard() {
+function TabPane(props: {eventKey: string, children: ReactNode}) {
     return (
-        <Tab.Container id="dashboard-page" defaultActiveKey="/creator">
-            <Row className="g-0 h-full">
-                <Col sm={2} className="h-full">
-                    <StyledSidebar>
-                        <Nav variant="pills" className="flex-column">
-                            <NavItem href="/creator">Creator</NavItem>
-                            <NavItem href="/schedule">Schedule</NavItem>
-                        </Nav>
-                    </StyledSidebar>
-                </Col>
-                <Col sm={10}>
-                    <StyledContent>
-                    <Tab.Content>
-                        <Tab.Pane eventKey="/creator" transition={false}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Manage Creator</Card.Title>
-                                    <Card.Text>
-                                        TODO: /creator
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="/schedule" transition={false}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Manage Schedule</Card.Title>
-                                    <Card.Text>
-                                        TODO: /schedule
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Tab.Pane>
-                    </Tab.Content>
-                    </StyledContent>
-                </Col>
-              </Row>
-        </Tab.Container>
+        <Tab.Pane eventKey={props.eventKey} transition={false}>
+            <Card>
+                {props.children}
+            </Card>
+        </Tab.Pane>
+    );
+}
+
+export default function Dashboard(props: {eventKey: string}) {
+    return (
+        <StyledContainer className="h-full">
+            <Tab.Container id="dashboard-page" defaultActiveKey={props.eventKey}>
+                <Row>
+                    <Col sm={2}>
+                        <Card>
+                            <Card.Header>Menu</Card.Header>
+                            <ListGroup variant="flush">
+                                <ListItem href="/creator">Creator</ListItem>
+                                <ListItem href="/schedule">Schedule</ListItem>
+                            </ListGroup>
+                        </Card>
+                    </Col>
+                    <Col sm={10}>
+                        <Tab.Content>
+                            <TabPane eventKey="/creator">
+                                <Creator />
+                            </TabPane>
+                            <TabPane eventKey="/schedule">
+                                <Schedule />
+                            </TabPane>
+                        </Tab.Content>
+                    </Col>
+                  </Row>
+            </Tab.Container>
+        </StyledContainer>
     );
 }

@@ -49,6 +49,7 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@types/styled-components": "^5.1.26",
+    "axios-mock-adapter": "^1.21.4",
     "tsconfig-paths-webpack-plugin": "^4.0.1"
   }
 }

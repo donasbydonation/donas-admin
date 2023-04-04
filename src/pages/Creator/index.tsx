@@ -1,29 +1,23 @@
+import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import Image from 'react-bootstrap/Image'
-
-const TMP_DUMMY_DATA = {};
-
-function TableData() {
-    return (
-        <tr>
-            <td>
-                <Image
-                    src="https://yt3.googleusercontent.com/5O_8Px4SI2tD0mMppzZoApw53qy1R-8DUfvdxgNMDQsfnkG2S5cNTDJsWQckrQTuKnbZbw4yYg=s176-c-k-c0x00ffffff-no-rj"
-                    width={64}
-                    height={64}
-                    roundedCircle
-                />
-            </td>
-            <td>송선생</td>
-            <td>https://www.youtube.com/@S_YW</td>
-            <td>https://www.twitch.tv/thdduddns98</td>
-            <td></td>
-        </tr>
-    );
-}
+import { useRecoilState } from 'recoil';
+import { tokenState } from '@/atoms/tokenState';
+import { TableData, TableDataProps } from './components';
+import * as apiCall from './api';
 
 export default function Creator() {
+    const [token] = useRecoilState(tokenState);
+    const [creators, setCreators] = useState<Array<TableDataProps>>([]);
+    const onMount = () => {
+        apiCall.getCreators(token.access).then(body => {
+            setCreators(body);
+        });
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(onMount, [])
+
     return (
         <>
             <Card.Body>
@@ -39,7 +33,16 @@ export default function Creator() {
                             </tr>
                         </thead>
                         <tbody>
-                            <TableData />
+                            {creators.map((creator, idx) => (
+                                <TableData
+                                    profileImage={creator.profileImage}
+                                    name={creator.name}
+                                    youtubeURL={creator.youtubeURL}
+                                    twitchURL={creator.twitchURL}
+                                    africaURL={creator.africaURL}
+                                    key={idx}
+                                />
+                            ))}
                         </tbody>
                     </Table>
             </Card.Body>

@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const StyledNavbar = styled(Navbar)`
     background-color: #FF3363;
+    height: 50px;
 `;
 
 export default function Header() {

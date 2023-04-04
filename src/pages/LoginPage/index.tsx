@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
-import { loginFN } from '@/utils/auth'
+import * as apiCall from './api';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
 
@@ -13,6 +13,7 @@ const StyledPage = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 `;
 
 const StyledForm = styled(Form)`
@@ -26,46 +27,41 @@ export default function LoginPage() {
     const handleSubmit = (e: FormEvent<HTMLButtonElement>)  => {
         e.preventDefault();
 
-        loginFN({
+        apiCall.login({
             id: (document.getElementById("login-id") as HTMLInputElement).value,
             pw: (document.getElementById("login-pw") as HTMLInputElement).value,
         }).then(body => {
-            ////
-            // TODO: set token to recoil
-            console.log(body);
-            setToken("TEST_TOKEN");
-            ////
+            setToken({
+                access: body.accessToken,
+                refresh: body.refreshToken,
+            });
             navigate("/");
         });
     }
 
     return (
-        <StyledPage className="h-full">
+        <StyledPage>
             <Card>
                 <Card.Body>
-                    <Card.Title>Administrator Log In</Card.Title>
+                    <Card.Title>관리자 로그인</Card.Title>
                     <StyledForm onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="login-id">
-                            <Form.Label>ID</Form.Label>
+                            <Form.Label>아이디</Form.Label>
                             <Form.Control
                                 required
                                 type="text"
                                 placeholder="Enter ID"
                             />
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="login-pw">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>비밀번호</Form.Label>
                             <Form.Control
                                 required
                                 type="password"
                                 placeholder="Enter Password"
                             />
                         </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Log in
-                        </Button>
+                        <Button variant="primary" type="submit">로그인</Button>
                     </StyledForm>
                 </Card.Body>
             </Card>

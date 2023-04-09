@@ -35,7 +35,7 @@ export default function Creator() {
                         <PaginationItem key={idx} page={page} />
                     ))}
                 </Pagination>
-                <Button variant="primary">크리에이터 추가</Button>
+                {/*<Button variant="primary">크리에이터 추가</Button>*/}
             </div>
             <Table striped bordered hover>
                 <thead>

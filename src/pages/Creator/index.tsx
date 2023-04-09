@@ -3,31 +3,11 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
-import Modal from 'react-bootstrap/Modal';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
 import { useSearchParams } from "react-router-dom";
-import { TableData, TableDataProps, PaginationItem } from './components';
+import { TableData, TableDataProps, PaginationItem, AddCreatorModal } from './components';
 import * as apiCall from './api';
-
-function AddingCreatorModal(props: {show: boolean, handleClose: () => void}) {
-    return (
-      <Modal show={props.show} onHide={props.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={props.handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-}
 
 export default function Creator() {
     const [token] = useRecoilState(tokenState);
@@ -52,7 +32,7 @@ export default function Creator() {
 
     return (
         <>
-            <AddingCreatorModal show={modalShow} handleClose={handleModalClose} />
+            <AddCreatorModal show={modalShow} handleClose={handleModalClose} />
             <Card.Body>
                 <Card.Title>크리에이터 관리</Card.Title>
                 <div className="mb-3 d-flex justify-content-between">

@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEventHandler } from 'react';
+import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -6,26 +6,8 @@ import Pagination from 'react-bootstrap/Pagination';
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@/atoms/tokenState';
 import { useSearchParams } from "react-router-dom";
-import { TableData, TableDataProps } from './components';
+import { TableData, TableDataProps, PaginationItem } from './components';
 import * as apiCall from './api';
-
-function PaginationItem(props: { page: number }) {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const onClick: MouseEventHandler<HTMLElement> = (e) => {
-        e.preventDefault();
-        setSearchParams({page: `${props.page}`});
-    };
-
-    return(
-        <Pagination.Item
-            key={props.page}
-            active={`${props.page}` === (searchParams.get("page") || "1")}
-            onClick={onClick}
-        >
-            {props.page}
-        </Pagination.Item>
-    );
-}
 
 export default function Creator() {
     const [token] = useRecoilState(tokenState);

@@ -22,9 +22,6 @@ if(process.env.NODE_ENV === "development") {
     /**
      * Creators HTTP_GET mock responses
      */
-    const creatorsHttpGetResponseGenerator = (idx: number) => {
-    };
-
     mock.onGet(apiConfig.apis.creators.httpGET, {params: {currentPage: "1"}}).reply((req) => {
         console.log("[AxiosMock/RequestInfo/URL] " + req.url);
         console.log("[AxiosMock/RequestInfo/param] " + req.params.currentPage);

@@ -33,15 +33,16 @@ export default function Creator() {
     const [pages, setPages] = useState<Array<number>>([]);
     const [searchParams] = useSearchParams();
 
-    const onMount = () => {
-        apiCall.getCreators(token.access, searchParams.get("page") || "1").then(body => {
+    const onPageChanged = () => {
+        const currentPage = searchParams.get("page") || "1";
+        apiCall.getCreators(token.access, currentPage).then(body => {
             setPages(Array.from({length: body.totalPages}, (_, i) => i + 1));
             setCreators(body.content);
         });
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(onMount, [searchParams]);
+    useEffect(onPageChanged, [searchParams]);
 
     return (
         <Card.Body>

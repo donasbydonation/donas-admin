@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import * as apiCall from './api';
-import { setAccessToken, setRefreshToken } from '@/utils/token';
+import { cookieConfig, setCookie } from '@/utils/cookie';
 import { input } from '@/utils/getElementById';
 
 const StyledPage = styled.div`
@@ -30,8 +30,8 @@ export default function LoginPage() {
             id: input("login-id").value,
             pw: input("login-pw").value,
         }).then(body => {
-            setAccessToken(body.accessToken);
-            setRefreshToken(body.refreshToken);
+            setCookie(cookieConfig.names.accessToken, body.accessToken);
+            setCookie(cookieConfig.names.refreshToken, body.refreshToken);
             navigate("/");
         }).catch(err => {
             alert("앙틀렸띠");

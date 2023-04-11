@@ -1,5 +1,5 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { getAccessToken } from '@/utils/token';
+import { cookieConfig, getCookie } from '@/utils/cookie';
 
 export type RegisterCreatorResponseDTO = null;
 
@@ -14,7 +14,7 @@ export function registerCreator(profileImage: File, name: string, youtubeURL: st
     return axios.post(apiConfig.apis.creators.httpPOST, formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": getAccessToken(),
+            "Authorization": getCookie(cookieConfig.names.accessToken),
             "Content-Type": 'multipart/form-data',
         },
     });

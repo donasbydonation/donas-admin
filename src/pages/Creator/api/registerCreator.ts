@@ -1,9 +1,9 @@
 import { axios, apiConfig } from '@/utils/axios';
 import { getAccessToken } from '@/utils/token';
 
-export type AddCreatorResponseDTO = null;
+export type RegisterCreatorResponseDTO = null;
 
-export function addCreator(profileImage: File, name: string, youtubeURL: string, twitchURL: string, africaURL: string): Promise<AddCreatorResponseDTO> {
+export function registerCreator(profileImage: File, name: string, youtubeURL: string, twitchURL: string, africaURL: string): Promise<RegisterCreatorResponseDTO> {
     const formData = new FormData();
     formData.append("profileImage", profileImage);
     formData.append("name", name);

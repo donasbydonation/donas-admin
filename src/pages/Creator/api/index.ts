@@ -1,2 +1,2 @@
 export * from './getCreators';
-export * from './addCreator';
+export * from './registerCreator';

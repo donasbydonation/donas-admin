@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 
-export function AddCreatorModal(props: {show: boolean, handleClose: () => void}) {
+export function RegisterCreatorModal(props: {show: boolean, handleClose: () => void}) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         props.handleClose();
@@ -14,13 +14,13 @@ export function AddCreatorModal(props: {show: boolean, handleClose: () => void})
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
-        const profileImage = (input("add-creator-profile-image").files as FileList)[0];
-        const name = input("add-creator-name").value;
-        const youtubeURL = input("add-creator-youtube-url").value;
-        const twitchURL = input("add-creator-twitch-url").value;
-        const africaURL = input("add-creator-africa-url").value;
+        const profileImage = (input("register-creator-profile-image").files as FileList)[0];
+        const name = input("register-creator-name").value;
+        const youtubeURL = input("register-creator-youtube-url").value;
+        const twitchURL = input("register-creator-twitch-url").value;
+        const africaURL = input("register-creator-africa-url").value;
 
-        apiCall.addCreator(profileImage, name, youtubeURL, twitchURL, africaURL).then(() => {
+        apiCall.registerCreator(profileImage, name, youtubeURL, twitchURL, africaURL).then(() => {
             alert("등록되었습니다.");
         }).catch((err) => {
             alert("등록에 실패하였습니다.");
@@ -35,29 +35,29 @@ export function AddCreatorModal(props: {show: boolean, handleClose: () => void})
                 <Modal.Title>크리에이터 추가</Modal.Title>
             </Modal.Header>
 
-            <Form id="add-creator">
+            <Form id="register-creator">
                 <Modal.Body>
-                    <Form.Group className="mb-3" controlId="add-creator-profile-image">
+                    <Form.Group className="mb-3" controlId="register-creator-profile-image">
                         <Form.Label>프로필 이미지</Form.Label>
                         <Form.Control type="file" placeholder="" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="add-creator-name">
+                    <Form.Group className="mb-3" controlId="register-creator-name">
                         <Form.Label>크리에이터 이름</Form.Label>
                         <Form.Control type="url" placeholder="Creator name" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="add-creator-youtube-url">
+                    <Form.Group className="mb-3" controlId="register-creator-youtube-url">
                         <Form.Label>유튜브 채널 링크</Form.Label>
                         <Form.Control type="url" placeholder="YouTube URL" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="add-creator-twitch-url">
+                    <Form.Group className="mb-3" controlId="register-creator-twitch-url">
                         <Form.Label>트위치 방송국 링크</Form.Label>
                         <Form.Control type="url" placeholder="Twitch URL" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="add-creator-africa-url">
+                    <Form.Group className="mb-3" controlId="register-creator-africa-url">
                         <Form.Label>아프리카 방송국 링크</Form.Label>
                         <Form.Control type="url" placeholder="Africa URL" />
                     </Form.Group>

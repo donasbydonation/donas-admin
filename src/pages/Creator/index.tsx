@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import { useSearchParams } from "react-router-dom";
-import { TableData, TableDataProps, PaginationItem, AddCreatorModal } from './components';
+import { TableData, TableDataProps, PaginationItem, RegisterCreatorModal } from './components';
 import * as apiCall from './api';
 
 export default function Creator() {
@@ -29,7 +29,7 @@ export default function Creator() {
 
     return (
         <>
-            <AddCreatorModal show={modalShow} handleClose={handleModalClose} />
+            <RegisterCreatorModal show={modalShow} handleClose={handleModalClose} />
             <Card.Body>
                 <Card.Title>크리에이터 관리</Card.Title>
                 <div className="mb-3 d-flex justify-content-between">

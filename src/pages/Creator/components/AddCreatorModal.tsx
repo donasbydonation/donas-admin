@@ -3,10 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
+import { input } from '@/utils/getElementById';
 
 export function AddCreatorModal(props: {show: boolean, handleClose: () => void}) {
-    const byId = (id: string) => (document.getElementById(id) as HTMLInputElement);
-
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         props.handleClose();
@@ -15,11 +14,11 @@ export function AddCreatorModal(props: {show: boolean, handleClose: () => void})
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
-        const profileImage = (byId("add-creator-profile-image").files as FileList)[0];
-        const name = (byId("add-creator-name").value);
-        const youtubeURL = (byId("add-creator-youtube-url").value);
-        const twitchURL = (byId("add-creator-twitch-url").value);
-        const africaURL = (byId("add-creator-africa-url").value);
+        const profileImage = (input("add-creator-profile-image").files as FileList)[0];
+        const name = input("add-creator-name").value;
+        const youtubeURL = input("add-creator-youtube-url").value;
+        const twitchURL = input("add-creator-twitch-url").value;
+        const africaURL = input("add-creator-africa-url").value;
 
         apiCall.addCreator(profileImage, name, youtubeURL, twitchURL, africaURL).then(() => {
             alert("등록되었습니다.");

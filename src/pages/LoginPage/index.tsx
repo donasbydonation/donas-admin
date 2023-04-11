@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import * as apiCall from './api';
 import { setAccessToken, setRefreshToken } from '@/utils/token';
+import { input } from '@/utils/getElementById';
 
 const StyledPage = styled.div`
     background-color: #FFE6EB;
@@ -26,8 +27,8 @@ export default function LoginPage() {
         e.preventDefault();
 
         apiCall.login({
-            id: (document.getElementById("login-id") as HTMLInputElement).value,
-            pw: (document.getElementById("login-pw") as HTMLInputElement).value,
+            id: input("login-id").value,
+            pw: input("login-pw").value,
         }).then(body => {
             setAccessToken(body.accessToken);
             setRefreshToken(body.refreshToken);

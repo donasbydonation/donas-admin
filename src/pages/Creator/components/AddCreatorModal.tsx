@@ -2,9 +2,7 @@ import { MouseEventHandler } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useRecoilState } from 'recoil';
-import { tokenState } from '@/atoms/tokenState';
-import { addCreator } from '../api';
+import * as apiCall from '../api';
 
 export function AddCreatorModal(props: {show: boolean, handleClose: () => void}) {
     const byId = (id: string) => (document.getElementById(id) as HTMLInputElement);
@@ -13,8 +11,6 @@ export function AddCreatorModal(props: {show: boolean, handleClose: () => void})
         e.preventDefault();
         props.handleClose();
     };
-
-    const [token] = useRecoilState(tokenState);
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
@@ -25,11 +21,10 @@ export function AddCreatorModal(props: {show: boolean, handleClose: () => void})
         const twitchURL = (byId("add-creator-twitch-url").value);
         const africaURL = (byId("add-creator-africa-url").value);
 
-        addCreator(token.access, profileImage, name, youtubeURL, twitchURL, africaURL).then(() => {
+        apiCall.addCreator(profileImage, name, youtubeURL, twitchURL, africaURL).then(() => {
             alert("등록되었습니다.");
         }).catch((err) => {
             alert("등록에 실패하였습니다.");
-            console.error(err);
         }).finally(() => {
             props.handleClose();
         });

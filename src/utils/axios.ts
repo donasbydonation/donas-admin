@@ -1,4 +1,4 @@
-import Axios, { InternalAxiosRequestConfig } from 'axios';
+import Axios from 'axios';
 
 export const apiConfig = {
     baseURL: "https://donas.me",
@@ -12,20 +12,13 @@ export const apiConfig = {
         },
     },
 };
+
 export const axios = Axios.create({
     baseURL: apiConfig.baseURL,
+    headers: {
+        Accept: "application/json",
+    },
 });
-
-function authRequestInterceptor(config: InternalAxiosRequestConfig) {
-    const token = ""; // TODO: token handling
-    if (token) {
-        config.headers.authorization = `${token}`;
-    }
-    config.headers.Accept = 'application/json';
-    return config;
-}
-
-axios.interceptors.request.use(authRequestInterceptor);
 
 axios.interceptors.response.use(
     (response) => {

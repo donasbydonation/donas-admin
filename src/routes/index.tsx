@@ -1,11 +1,10 @@
 import { useRoutes, Navigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { tokenState } from '@/atoms/tokenState';
+import { getAccessToken } from '@/utils/token';
 import LoginPage from '@/pages/LoginPage';
 import Dashboard from '@/pages/Dashboard';
 
 export default function AppRoutes() {
-    const [token] = useRecoilState(tokenState);
+    const accessToken = getAccessToken();
 
     const commonRoutes = [
         { path: "/login", element: <LoginPage /> },
@@ -21,7 +20,7 @@ export default function AppRoutes() {
         { path: "*", element: <Navigate to="/login" /> },
     ];
 
-    const routes = token.access ? protectedRoutes : publicRoutes;
+    const routes = accessToken ? protectedRoutes : publicRoutes;
 
     const element = useRoutes([...routes, ...commonRoutes]);
 

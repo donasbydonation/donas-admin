@@ -3,21 +3,18 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
-import { useRecoilState } from 'recoil';
-import { tokenState } from '@/atoms/tokenState';
 import { useSearchParams } from "react-router-dom";
 import { TableData, TableDataProps, PaginationItem, AddCreatorModal } from './components';
 import * as apiCall from './api';
 
 export default function Creator() {
-    const [token] = useRecoilState(tokenState);
     const [creators, setCreators] = useState<Array<TableDataProps>>([]);
     const [pages, setPages] = useState<Array<number>>([]);
     const [searchParams] = useSearchParams();
 
     const onPageChanged = () => {
         const currentPage = searchParams.get("page") || "1";
-        apiCall.getCreators(token.access, currentPage).then(body => {
+        apiCall.getCreators(currentPage).then(body => {
             setPages(Array.from({length: body.totalPages}, (_, i) => i + 1));
             setCreators(body.content);
         });

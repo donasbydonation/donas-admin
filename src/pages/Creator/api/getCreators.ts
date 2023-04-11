@@ -1,4 +1,5 @@
 import { axios, apiConfig } from '@/utils/axios';
+import { cookieConfig, getCookie } from '@/utils/cookie';
 import { TableDataProps } from '../components';
 
 export type GetCreatorsResponseDTO = {
@@ -7,10 +8,10 @@ export type GetCreatorsResponseDTO = {
     content: Array<TableDataProps>,
 };
 
-export function getCreators(token: string, currentPage: string): Promise<GetCreatorsResponseDTO> {
+export function getCreators(currentPage: string): Promise<GetCreatorsResponseDTO> {
     return axios.get(apiConfig.apis.creators.httpGET, {
         headers: {
-            Authorization: token,
+            Authorization: getCookie(cookieConfig.names.accessToken),
         },
         params: {
             currentPage,

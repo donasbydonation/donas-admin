@@ -5,8 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import * as apiCall from './api';
-import { useRecoilState } from 'recoil';
-import { tokenState } from '@/atoms/tokenState';
+import { cookieConfig, setCookie } from '@/utils/cookie';
+import { input } from '@/utils/getElementById';
 
 const StyledPage = styled.div`
     background-color: #FFE6EB;
@@ -22,20 +22,19 @@ const StyledForm = styled(Form)`
 
 export default function LoginPage() {
     const navigate = useNavigate();
-    const [, setToken] = useRecoilState(tokenState);
 
     const handleSubmit = (e: FormEvent<HTMLButtonElement>)  => {
         e.preventDefault();
 
         apiCall.login({
-            id: (document.getElementById("login-id") as HTMLInputElement).value,
-            pw: (document.getElementById("login-pw") as HTMLInputElement).value,
+            id: input("login-id").value,
+            pw: input("login-pw").value,
         }).then(body => {
-            setToken({
-                access: body.accessToken,
-                refresh: body.refreshToken,
-            });
+            setCookie(cookieConfig.names.accessToken, body.accessToken);
+            setCookie(cookieConfig.names.refreshToken, body.refreshToken);
             navigate("/");
+        }).catch(err => {
+            alert("앙틀렸띠");
         });
     }
 
@@ -44,7 +43,7 @@ export default function LoginPage() {
             <Card>
                 <Card.Body>
                     <Card.Title>관리자 로그인</Card.Title>
-                    <StyledForm onSubmit={handleSubmit}>
+                    <StyledForm onSubmit={handleSubmit} id="login">
                         <Form.Group className="mb-3" controlId="login-id">
                             <Form.Label>아이디</Form.Label>
                             <Form.Control

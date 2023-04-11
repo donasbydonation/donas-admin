@@ -14,7 +14,6 @@ export default function Creator() {
     const [creators, setCreators] = useState<Array<TableDataProps>>([]);
     const [pages, setPages] = useState<Array<number>>([]);
     const [searchParams] = useSearchParams();
-    const [modalShow, setModalShow] = useState(false);
 
     const onPageChanged = () => {
         const currentPage = searchParams.get("page") || "1";
@@ -27,6 +26,7 @@ export default function Creator() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(onPageChanged, [searchParams]);
 
+    const [modalShow, setModalShow] = useState(false);
     const handleModalClose = () => setModalShow(false);
     const handleModalShow = () => setModalShow(true);
 

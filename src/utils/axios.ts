@@ -5,6 +5,7 @@ export const apiConfig = {
     apis: {
         creators: {
             httpGET: "/api/v1/creators",
+            httpPOST: "/api/v1/creator",
         },
         login: {
             httpPOST: "/api/v1/login",

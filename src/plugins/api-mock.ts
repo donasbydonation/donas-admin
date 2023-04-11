@@ -78,4 +78,19 @@ if(process.env.NODE_ENV === "development") {
         };
         return [200, body];
     });
+
+    /**
+     * Creator HTTP_POST mock responses
+     */
+    mock.onPost(apiConfig.apis.creators.httpPOST).reply((req) => {
+        console.log("[AxiosMock/RequestInfo/URL]", req.url);
+        console.log("[AxiosMock/RequestInfo/FormData]", {
+            profileImage: req.data.get("profileImage"),
+            name: req.data.get("name"),
+            youtubeURL: req.data.get("youtubeURL"),
+            twitchURL: req.data.get("twitchURL"),
+            africaURL: req.data.get("africaURL"),
+        });
+        return [200, null];
+    });
 }

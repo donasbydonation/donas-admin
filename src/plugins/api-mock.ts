@@ -1,8 +1,6 @@
 import { axios, apiConfig } from '@/utils/axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as data from './data';
-import { LoginResponseDTO } from '@/pages/LoginPage/api';
-import { GetCreatorsResponseDTO } from '@/pages/Creator/api';
 
 if(process.env.NODE_ENV === "development") {
     console.log("Axios API Mock running");
@@ -52,4 +50,19 @@ if(process.env.NODE_ENV === "development") {
         }));
         return [200, null];
     });
+
+    /**
+     * Schedules HTTP_GET mock responses
+     */
+    for (let i = 0; i < data.schedulePages.length; i++) {
+        mock.onGet(apiConfig.apis.schedules.httpGET, {params: {page: `${i + 1}`}})
+        .reply((req) => {
+            console.log(JSON.stringify({
+                timestamp: (new Date()).toString(),
+                url: req.url,
+                params: `?page=${req.params.page}`,
+            }));
+            return [200, data.schedulePages[i]];
+        });
+    }
 }

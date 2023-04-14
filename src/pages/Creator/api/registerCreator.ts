@@ -1,15 +1,17 @@
 import { axios, apiConfig } from '@/utils/axios';
 import { cookieConfig, getCookie } from '@/utils/cookie';
+import { CreatorInfo } from '@/types';
 
+export type RegisterCreator = Omit<CreatorInfo, "id">;
 export type RegisterCreatorResponseDTO = null;
 
-export function registerCreator(profileImage: File, name: string, youtubeURL: string, twitchURL: string, africaURL: string): Promise<RegisterCreatorResponseDTO> {
+export function registerCreator(args: RegisterCreator): Promise<RegisterCreatorResponseDTO> {
     const formData = new FormData();
-    formData.append("profileImage", profileImage);
-    formData.append("name", name);
-    formData.append("youtubeURL", youtubeURL);
-    formData.append("twitchURL", twitchURL);
-    formData.append("africaURL", africaURL);
+    formData.append("profileImage", args.profileImage as File);
+    formData.append("name", args.name);
+    formData.append("youtubeURL", args.youtubeURL);
+    formData.append("twitchURL", args.twitchURL);
+    formData.append("africaURL", args.africaURL);
 
     return axios.post(apiConfig.apis.creators.httpPOST, formData, {
         headers: {

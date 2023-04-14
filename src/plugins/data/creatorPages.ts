@@ -43,4 +43,4 @@ export const creatorPages: Array<GetCreatorsResponseDTO> = [
             }
         ]
     },
-]
+];

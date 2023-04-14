@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import { useSearchParams } from "react-router-dom";
 import { CreatorInfo } from '@/types';
-import { TableData, PaginationItem, RegisterCreatorModal } from './components';
+import { PaginationItem } from '@/components';
+import { TableData, RegisterCreatorModal } from './components';
 import * as apiCall from './api';
 
 export default function Creator() {

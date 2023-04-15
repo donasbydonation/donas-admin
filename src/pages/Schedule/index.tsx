@@ -18,6 +18,8 @@ export default function Schedule() {
         apiCall.getSchedules(searchParams.get("page")).then(body => {
             setPages(Array.from({length: body.context.totalPages}, (_, i) => i + 1));
             setSchedules(body.content);
+        }).catch(() => {
+            alert("스케줄 조회에 실패했습니다.");
         });
     };
 

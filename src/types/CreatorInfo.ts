@@ -7,4 +7,7 @@ export type CreatorInfo = {
     africaURL: string,
 };
 
-export type CreatorInfoShort = Pick<CreatorInfo, "id"|"name">;
+export type CreatorInfoShort = {
+    id: number,
+    name?: string,
+};

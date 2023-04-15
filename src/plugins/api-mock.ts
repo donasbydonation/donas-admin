@@ -9,7 +9,8 @@ if(process.env.NODE_ENV === "development") {
     /**
      * Token HTTP_POST mock response
      */
-    mock.onPost(apiConfig.apis.login.httpPOST).reply((req) => {
+    mock.onPost(apiConfig.apis.login.httpPOST)
+    .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
@@ -36,7 +37,8 @@ if(process.env.NODE_ENV === "development") {
     /**
      * Creator HTTP_POST mock responses
      */
-    mock.onPost(apiConfig.apis.creators.httpPOST).reply((req) => {
+    mock.onPost(apiConfig.apis.creators.httpPOST)
+    .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
@@ -65,4 +67,32 @@ if(process.env.NODE_ENV === "development") {
             return [200, data.schedulePages[i]];
         });
     }
+
+    /**
+     * Schedules HTTP_GET mock responses
+     */
+    mock.onGet(apiConfig.apis.creators.all.httpGET)
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+        }));
+        return [200, data.allCreators];
+    });
+
+    /**
+     * Schedule HTTP_POST mock responses
+     */
+    mock.onPost(apiConfig.apis.schedules.httpPOST)
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+            formData: {
+                banner: `File.name: ${req.data.get("banner").name}`,
+                schedule: req.data.get("schedule"),
+            }
+        }));
+        return [200, null];
+    });
 }

@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
+import { toISOString } from '@/utils/datetime';
 
 export function ModifyScheduleModal(props: {
     show: boolean,
@@ -24,7 +25,7 @@ export function ModifyScheduleModal(props: {
             {
                 name: input("modify-schedule-name").value,
                 description: input("modify-schedule-description").value,
-                datetime: new Date(input("modify-schedule-date").value).toISOString(),
+                datetime: toISOString(input("modify-schedule-date").value),
             },
         ).then(() => {
             alert("수정되었습니다.");

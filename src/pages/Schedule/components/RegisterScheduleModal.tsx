@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
+import { toISOString } from '@/utils/datetime';
 import { CreatorInfoShort } from '@/types';
 
 export function RegisterScheduleModal(props: {show: boolean, handleClose: () => void}) {
@@ -22,7 +23,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
                 },
                 name: input("register-schedule-name").value,
                 description: input("register-schedule-description").value,
-                datetime: new Date(input("register-schedule-date").value).toISOString(),
+                datetime: toISOString(input("register-schedule-date").value),
             }
         ).then(() => {
             alert("추가되었습니다.");

@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
-import { ScheduleInfo } from '@/types';
 
 export function ModifyScheduleModal(props: {
     show: boolean,
@@ -18,12 +17,15 @@ export function ModifyScheduleModal(props: {
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-        apiCall.modifySchedule(props.id, {
-            bannerImage: (input("modify-schedule-banner-image").files as FileList)[0],
-            name: input("modify-schedule-name").value,
-            description: input("modify-schedule-description").value,
-            datetime: new Date(input("modify-schedule-date").value).toISOString(),
-        }).then(() => {
+        apiCall.modifySchedule(
+            props.id,
+            (input("modify-schedule-banner-image").files as FileList)[0],
+            {
+                name: input("modify-schedule-name").value,
+                description: input("modify-schedule-description").value,
+                datetime: new Date(input("modify-schedule-date").value).toISOString(),
+            },
+        ).then(() => {
             alert("수정되었습니다.");
         }).catch(() => {
             alert("수정에 실패하였습니다.");

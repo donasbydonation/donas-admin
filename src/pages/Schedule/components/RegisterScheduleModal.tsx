@@ -14,15 +14,17 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-        apiCall.registerSchedule({
-            creator: {
-                id: parseInt(input("register-schedule-creator").value),
-            },
-            bannerImage: (input("register-schedule-banner-image").files as FileList)[0],
-            name: input("register-schedule-name").value,
-            description: input("register-schedule-description").value,
-            datetime: new Date(input("register-schedule-date").value).toISOString(),
-        }).then(() => {
+        apiCall.registerSchedule(
+            (input("register-schedule-banner-image").files as FileList)[0],
+            {
+                creator: {
+                    id: parseInt(input("register-schedule-creator").value),
+                },
+                name: input("register-schedule-name").value,
+                description: input("register-schedule-description").value,
+                datetime: new Date(input("register-schedule-date").value).toISOString(),
+            }
+        ).then(() => {
             alert("등록되었습니다.");
         }).catch(() => {
             alert("등록에 실패하였습니다.");

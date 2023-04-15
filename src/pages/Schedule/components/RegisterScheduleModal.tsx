@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, MouseEventHandler } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { MouseEventHandler } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
-// import { input } from '@/utils/getElementById';
+import { input } from '@/utils/getElementById';
 import { CreatorInfoShort } from '@/types';
 
 export function RegisterScheduleModal(props: {show: boolean, handleClose: () => void}) {
@@ -15,7 +14,21 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-
+        apiCall.registerSchedule({
+            creator: {
+                id: parseInt(input("register-schedule-creator").value),
+            },
+            bannerImage: (input("register-schedule-banner-image").files as FileList)[0],
+            name: input("register-schedule-name").value,
+            description: input("register-schedule-description").value,
+            datetime: new Date(input("register-schedule-date").value).toISOString(),
+        }).then(() => {
+            alert("등록되었습니다.");
+        }).catch((err) => {
+            alert("등록에 실패하였습니다.");
+        }).finally(() => {
+            props.handleClose();
+        });
     };
 
     const [allCreators,setAllCreators] = useState<Array<CreatorInfoShort>>([]);
@@ -40,7 +53,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
                         <Form.Select>
                             <option>선택</option>
                             {allCreators.map((creator, idx) => (
-                                <option value={creator.id}>
+                                <option value={creator.id} key={idx}>
                                     {creator.name} (등록 번호: {creator.id})
                                 </option>
                             ))}

@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import * as data from './data';
 
 if(process.env.NODE_ENV === "development") {
-    console.log("Axios API Mock running");
+    console.warn("Axios API Mock running");
     const mock = new MockAdapter(axios);
 
     /**
@@ -16,7 +16,7 @@ if(process.env.NODE_ENV === "development") {
             url: req.url,
             body: req.data,
         }));
-        return [200, data.login];
+        return [201, data.login];
     });
 
     /**
@@ -50,7 +50,7 @@ if(process.env.NODE_ENV === "development") {
                 africaURL: req.data.get("africaURL"),
             }
         }));
-        return [200, null];
+        return [201, null];
     });
 
     /**
@@ -93,6 +93,6 @@ if(process.env.NODE_ENV === "development") {
                 schedule: req.data.get("schedule"),
             }
         }));
-        return [200, null];
+        return [201, null];
     });
 }

@@ -64,12 +64,12 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
                     <Form.Group className="mb-3" controlId="register-schedule-banner-image">
                         <Form.Label>방송 배너 이미지</Form.Label>
-                        <Form.Control type="file" placeholder="방송 배너 이미지" />
+                        <Form.Control type="file" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-schedule-name">
                         <Form.Label>방송 제목</Form.Label>
-                        <Form.Control type="text" placeholder="방송 제목" />
+                        <Form.Control type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-schedule-description">
@@ -79,7 +79,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
                     <Form.Group className="mb-3" controlId="register-schedule-date">
                         <Form.Label>방송 시간</Form.Label>
-                        <Form.Control type="datetime-local" placeholder="방송 시간" />
+                        <Form.Control type="datetime-local" />
                     </Form.Group>
                 </Modal.Body>
 

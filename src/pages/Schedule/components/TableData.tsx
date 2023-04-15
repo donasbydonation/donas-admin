@@ -1,8 +1,9 @@
-import { MouseEventHandler } from 'react';
+import { useState, MouseEventHandler } from 'react';
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
 import { ScheduleInfo } from '@/types';
 import * as apiCall from '../api';
+import { ModifyScheduleModal } from '.';
 
 export type TableDataProps = ScheduleInfo;
 
@@ -39,26 +40,41 @@ export function TableData(props: TableDataProps) {
         }
     };
 
+    const [modalShow, setModalShow] = useState(false);
+    const handleModalClose = () => setModalShow(false);
+    const handleModalShow = () => setModalShow(true);
+
     return (
-        <tr>
-            <td>{props.id}</td>
-            <td>{props.creator.name}</td>
-            <td>
-                <Image
-                    src={props.bannerImage as string}
-                    width={128}
-                    height={64}
-                    rounded
-                />
-            </td>
-            <td>{props.name}</td>
-            <td>{props.description}</td>
-            <td>{parseIso8601(props.datetime)}</td>
-            <td>
-                <Button variant="outline-danger" size="sm" onClick={onClickDelete}>
-                    삭제
-                </Button>
-            </td>
-        </tr>
+        <>
+            <ModifyScheduleModal
+                show={modalShow}
+                handleClose={handleModalClose}
+                id={props.id}
+            />
+            <tr>
+                <td>{props.id}</td>
+                <td>{props.creator.name}</td>
+                <td>
+                    <Image
+                        src={props.bannerImage as string}
+                        width={128}
+                        height={64}
+                        rounded
+                    />
+                </td>
+                <td>{props.name}</td>
+                <td>{props.description}</td>
+                <td>{parseIso8601(props.datetime)}</td>
+                <td>
+                    <Button variant="outline-success" size="sm" onClick={handleModalShow}>
+                        수정
+                    </Button>
+                    {" "}
+                    <Button variant="outline-danger" size="sm" onClick={onClickDelete}>
+                        삭제
+                    </Button>
+                </td>
+            </tr>
+        </>
     );
 }

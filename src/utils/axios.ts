@@ -19,6 +19,12 @@ export const apiConfig = {
                     getRegex: () => (/\/api\/v1\/schedule\/\d+/),
                 },
             },
+            httpPUT: {
+                path: {
+                    getString: (id: number) => (`/api/v1/schedule/${id}`),
+                    getRegex: () => (/\/api\/v1\/schedule\/\d+/),
+                },
+            },
         },
         login: {
             httpPOST: "/api/v1/login",

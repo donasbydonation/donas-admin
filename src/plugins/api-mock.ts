@@ -107,4 +107,20 @@ if(process.env.NODE_ENV === "development") {
         }));
         return [200, null];
     });
+
+    /**
+     * Schedule HTTP_PUT mock responses
+     */
+    mock.onPut(apiConfig.apis.schedules.httpPUT.path.getRegex())
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+            formData: {
+                banner: `File.name: ${req.data.get("banner").name}`,
+                schedule: req.data.get("schedule"),
+            }
+        }));
+        return [200, null];
+    });
 }

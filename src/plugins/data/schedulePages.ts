@@ -49,7 +49,7 @@ export const schedulePages: Array<GetSchedulesResponseDTO> = [
                 id: 3,
                 name: "낮엔 3이었는데 밤엔 4인 것은?",
                 description: "축지법 송선생의 낮엔 3이었는데 밤엔 4인 것은?",
-                bannerImage: "https://i.ytimg.com/vi/vBzgwKDc2U8/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB_WwmuBDKGLfl6x5_T2O9wx8Fr8A",
+                bannerImage: "https://i.ytimg.com/vi/qIphNk2t7Pw/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBpbHa-VFBv8Rc9_ruxMqPPCHyRJA",
                 datetime: "2023-03-15T19:00:00+09:00", // ISO 8601 format
                 creator: {
                     id: 3,

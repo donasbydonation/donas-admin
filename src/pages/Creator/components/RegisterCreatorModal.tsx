@@ -14,13 +14,13 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
-        const profileImage = (input("register-creator-profile-image").files as FileList)[0];
-        const name = input("register-creator-name").value;
-        const youtubeURL = input("register-creator-youtube-url").value;
-        const twitchURL = input("register-creator-twitch-url").value;
-        const africaURL = input("register-creator-africa-url").value;
-
-        apiCall.registerCreator(profileImage, name, youtubeURL, twitchURL, africaURL).then(() => {
+        apiCall.registerCreator({
+            profileImage: (input("register-creator-profile-image").files as FileList)[0],
+            name: input("register-creator-name").value,
+            youtubeURL: input("register-creator-youtube-url").value,
+            twitchURL: input("register-creator-twitch-url").value,
+            africaURL: input("register-creator-africa-url").value,
+        }).then(() => {
             alert("등록되었습니다.");
         }).catch((err) => {
             alert("등록에 실패하였습니다.");

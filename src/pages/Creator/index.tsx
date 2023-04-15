@@ -4,11 +4,13 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import { useSearchParams } from "react-router-dom";
-import { TableData, TableDataProps, PaginationItem, RegisterCreatorModal } from './components';
+import { CreatorInfo } from '@/types';
+import { PaginationItem } from '@/components';
+import { TableData, RegisterCreatorModal } from './components';
 import * as apiCall from './api';
 
 export default function Creator() {
-    const [creators, setCreators] = useState<Array<TableDataProps>>([]);
+    const [creators, setCreators] = useState<Array<CreatorInfo>>([]);
     const [pages, setPages] = useState<Array<number>>([]);
     const [searchParams] = useSearchParams();
 
@@ -43,6 +45,7 @@ export default function Creator() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
+                            <th>등록 번호</th>
                             <th>프로필 이미지</th>
                             <th>크리에이터 이름</th>
                             <th>유튜브 채널 링크</th>
@@ -53,6 +56,7 @@ export default function Creator() {
                     <tbody>
                         {creators.map((creator, idx) => (
                             <TableData
+                                id={creator.id}
                                 profileImage={creator.profileImage}
                                 name={creator.name}
                                 youtubeURL={creator.youtubeURL}

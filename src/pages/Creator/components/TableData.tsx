@@ -1,19 +1,15 @@
 import Image from 'react-bootstrap/Image'
+import { CreatorInfo } from '@/types';
 
-export type TableDataProps = {
-    profileImage: string,
-    name: string,
-    youtubeURL: string,
-    twitchURL: string,
-    africaURL: string,
-}
+export type TableDataProps = CreatorInfo;
 
 export function TableData(props: TableDataProps) {
     return (
         <tr>
+            <td>{props.id}</td>
             <td>
                 <Image
-                    src={props.profileImage}
+                    src={props.profileImage as string}
                     width={64}
                     height={64}
                     roundedCircle

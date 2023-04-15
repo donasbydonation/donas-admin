@@ -7,6 +7,10 @@ export const apiConfig = {
             httpGET: "/api/v1/creators",
             httpPOST: "/api/v1/creator",
         },
+        schedules: {
+            httpGET: "/api/v1/schedules",
+            httpPOST: "/api/v1/schedule",
+        },
         login: {
             httpPOST: "/api/v1/login",
         },

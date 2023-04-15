@@ -1,11 +1,11 @@
 import { axios, apiConfig } from '@/utils/axios';
 import { cookieConfig, getCookie } from '@/utils/cookie';
-import { TableDataProps } from '../components';
+import { CreatorInfo } from '@/types';
 
 export type GetCreatorsResponseDTO = {
     totalPages: number,
     currentPage: number,
-    content: Array<TableDataProps>,
+    content: Array<CreatorInfo>,
 };
 
 export function getCreators(currentPage: string): Promise<GetCreatorsResponseDTO> {

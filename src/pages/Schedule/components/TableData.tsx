@@ -1,5 +1,8 @@
+import { MouseEventHandler } from 'react';
 import Image from 'react-bootstrap/Image'
+import Button from 'react-bootstrap/Button';
 import { ScheduleInfo } from '@/types';
+import * as apiCall from '../api';
 
 export type TableDataProps = ScheduleInfo;
 
@@ -18,12 +21,24 @@ function parseIso8601(iso8601: string): string {
     hours = hours ? hours : 12;
 
     const minutes = date.getMinutes();
-    const strMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+    const strMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
 
     return `${year}년 ${month}월 ${day}일 ${ampm} ${hours}시 ${strMinutes}분`;
 }
 
 export function TableData(props: TableDataProps) {
+    const onClickDelete: MouseEventHandler<HTMLElement> = (e) => {
+        e.preventDefault();
+        if (window.confirm("삭제하시겠습니까?")) {
+            apiCall.deleteSchedule(props.id)
+            .then(() => {
+                alert("삭제되었습니다.");
+            }).catch(() => {
+                alert("삭제에 실패하였습니다.");
+            });
+        }
+    };
+
     return (
         <tr>
             <td>{props.id}</td>
@@ -39,6 +54,11 @@ export function TableData(props: TableDataProps) {
             <td>{props.name}</td>
             <td>{props.description}</td>
             <td>{parseIso8601(props.datetime)}</td>
+            <td>
+                <Button variant="outline-danger" size="sm" onClick={onClickDelete}>
+                    삭제
+                </Button>
+            </td>
         </tr>
     );
 }

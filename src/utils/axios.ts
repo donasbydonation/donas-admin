@@ -13,6 +13,12 @@ export const apiConfig = {
         schedules: {
             httpGET: "/api/v1/schedules",
             httpPOST: "/api/v1/schedule",
+            httpDELETE: {
+                path: {
+                    getString: (id: number) => (`/api/v1/schedule/${id}`),
+                    getRegex: () => (/\/api\/v1\/schedule\/\d+/),
+                },
+            },
         },
         login: {
             httpPOST: "/api/v1/login",

@@ -95,4 +95,16 @@ if(process.env.NODE_ENV === "development") {
         }));
         return [201, null];
     });
+
+    /**
+     * Schedule HTTP_DELETE mock response
+     */
+    mock.onDelete(apiConfig.apis.schedules.httpDELETE.path.getRegex())
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+        }));
+        return [200, null];
+    });
 }

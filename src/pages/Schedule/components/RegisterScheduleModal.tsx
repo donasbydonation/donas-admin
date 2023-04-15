@@ -25,9 +25,9 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
                 datetime: new Date(input("register-schedule-date").value).toISOString(),
             }
         ).then(() => {
-            alert("등록되었습니다.");
+            alert("추가되었습니다.");
         }).catch(() => {
-            alert("등록에 실패하였습니다.");
+            alert("추가 실패하였습니다.");
         }).finally(() => {
             props.handleClose();
         });

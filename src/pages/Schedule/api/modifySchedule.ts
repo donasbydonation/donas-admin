@@ -10,7 +10,6 @@ export function modifySchedule(id: number, schedule: ModifySchedule): Promise<Mo
     formData.append("banner", schedule.bannerImage as File);
     formData.append("schedule", JSON.stringify(schedule));
 
-    console.log(apiConfig.apis.schedules.httpPUT.path.getString(id));
     return axios.put(apiConfig.apis.schedules.httpPUT.path.getString(id), formData, {
         headers: {
             "Accept": "*/*",

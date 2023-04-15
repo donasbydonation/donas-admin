@@ -13,7 +13,7 @@ export function registerSchedule(args: RegisterSchedule): Promise<RegisterSchedu
     return axios.post(apiConfig.apis.schedules.httpPOST, formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": getCookie(cookieConfig.names.accessToken),
+            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
             "Content-Type": 'multipart/form-data',
         },
     });

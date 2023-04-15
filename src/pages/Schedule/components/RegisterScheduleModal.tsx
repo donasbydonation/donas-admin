@@ -24,7 +24,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
             datetime: new Date(input("register-schedule-date").value).toISOString(),
         }).then(() => {
             alert("등록되었습니다.");
-        }).catch((err) => {
+        }).catch(() => {
             alert("등록에 실패하였습니다.");
         }).finally(() => {
             props.handleClose();
@@ -35,7 +35,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
     useEffect(() => {
         apiCall.getAllCreators().then(body => {
             setAllCreators(body);
-        }).catch((err) => {
+        }).catch(() => {
             alert("크리에이터 조회에 실패했습니다.");
         });
     }, []);

@@ -2,6 +2,7 @@ import { MouseEventHandler } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 
@@ -37,11 +38,16 @@ export function ModifyScheduleModal(props: {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>스케줄 변경</Modal.Title>
+                <Modal.Title>스케줄 수정</Modal.Title>
             </Modal.Header>
 
             <Form id="modify-schedule">
                 <Modal.Body>
+                    <Alert variant="danger">
+                        [주의!]
+                        스케줄이 부분적으로 변경되는 것이 아닌 기존의 스케줄이 덮어씌여집니다. 
+                        변경하고 싶지 않은 값은 기존의 것을 복사/붙여넣기 해주세요.
+                    </Alert>
                     <Form.Group className="mb-3" controlId="modify-schedule-banner-image">
                         <Form.Label>방송 배너 이미지</Form.Label>
                         <Form.Control type="file" />

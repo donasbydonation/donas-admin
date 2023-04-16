@@ -11,7 +11,7 @@ export type GetCreatorsResponseDTO = {
 export function getCreators(page: string|null): Promise<GetCreatorsResponseDTO> {
     return axios.get(apiConfig.apis.creators.httpGET, {
         headers: {
-            Authorization: getCookie(cookieConfig.names.accessToken),
+            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
         },
         params: {
             page: page || "1",

@@ -16,7 +16,7 @@ export function registerCreator(args: RegisterCreator): Promise<RegisterCreatorR
     return axios.post(apiConfig.apis.creators.httpPOST, formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": getCookie(cookieConfig.names.accessToken),
+            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
             "Content-Type": 'multipart/form-data',
         },
     });

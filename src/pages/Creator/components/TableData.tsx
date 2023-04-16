@@ -35,7 +35,7 @@ export function TableData(props: TableDataProps) {
                 <td>{props.id}</td>
                 <td>
                     <Image
-                        src={props.profileImage as string}
+                        src={props.profileImage}
                         width={64}
                         height={64}
                         roundedCircle

@@ -15,9 +15,9 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-        apiCall.registerSchedule(
-            (input("register-schedule-banner-image").files as FileList)[0],
-            {
+        apiCall.registerSchedule({
+            banner: (input("register-schedule-banner-image").files as FileList)[0],
+            schedule: {
                 creator: {
                     id: parseInt(input("register-schedule-creator").value),
                 },
@@ -25,7 +25,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
                 description: input("register-schedule-description").value,
                 datetime: toISOString(input("register-schedule-date").value),
             }
-        ).then(() => {
+        }).then(() => {
             alert("추가되었습니다.");
         }).catch(() => {
             alert("추가 실패하였습니다.");

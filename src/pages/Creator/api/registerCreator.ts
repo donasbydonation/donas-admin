@@ -2,22 +2,23 @@ import { axios, apiConfig } from '@/utils/axios';
 import { cookieConfig, getCookie } from '@/utils/cookie';
 import { CreatorInfo } from '@/types';
 
-export type RegisterCreator = Omit<CreatorInfo, "id">;
+export type RegisterCreatorRequestDTO = {
+    profile: File,
+    creatorInfo: Omit<CreatorInfo, "id"|"profileImage">
+};
+
 export type RegisterCreatorResponseDTO = null;
 
-export function registerCreator(args: RegisterCreator): Promise<RegisterCreatorResponseDTO> {
+export function registerCreator(body: RegisterCreatorRequestDTO): Promise<RegisterCreatorResponseDTO> {
     const formData = new FormData();
-    formData.append("profileImage", args.profileImage as File);
-    formData.append("name", args.name);
-    formData.append("youtubeURL", args.youtubeURL);
-    formData.append("twitchURL", args.twitchURL);
-    formData.append("africaURL", args.africaURL);
+    formData.append("profile", body.profile);
+    formData.append("creatorInfo", JSON.stringify(body.creatorInfo));
 
     return axios.post(apiConfig.apis.creators.httpPOST, formData, {
         headers: {
             "Accept": "*/*",
             "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
-            "Content-Type": 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
         },
     });
 }

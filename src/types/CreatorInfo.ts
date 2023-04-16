@@ -1,6 +1,6 @@
 export type CreatorInfo = {
     id: number,
-    profileImage: string|File,
+    profileImage: string,
     name: string,
     youtubeURL: string,
     twitchURL: string,

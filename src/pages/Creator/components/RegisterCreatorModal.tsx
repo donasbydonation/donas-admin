@@ -15,11 +15,13 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
         e.preventDefault();
 
         apiCall.registerCreator({
-            profileImage: (input("register-creator-profile-image").files as FileList)[0],
-            name: input("register-creator-name").value,
-            youtubeURL: input("register-creator-youtube-url").value,
-            twitchURL: input("register-creator-twitch-url").value,
-            africaURL: input("register-creator-africa-url").value,
+            profile: (input("register-creator-profile-image").files as FileList)[0],
+            creatorInfo: {
+                name: input("register-creator-name").value,
+                youtubeURL: input("register-creator-youtube-url").value,
+                twitchURL: input("register-creator-twitch-url").value,
+                africaURL: input("register-creator-africa-url").value,
+            },
         }).then(() => {
             alert("등록되었습니다.");
         }).catch((err) => {

@@ -43,11 +43,8 @@ if(process.env.NODE_ENV === "development") {
             timestamp: (new Date()).toString(),
             url: req.url,
             formData: {
-                profileImage: `File.name: ${req.data.get("profileImage").name}`,
-                name: req.data.get("name"),
-                youtubeURL: req.data.get("youtubeURL"),
-                twitchURL: req.data.get("twitchURL"),
-                africaURL: req.data.get("africaURL"),
+                profile: `File.name: ${req.data.get("profile").name}`,
+                creatorInfo: req.data.get("creatorInfo"),
             }
         }));
         return [201, null];

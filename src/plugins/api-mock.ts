@@ -132,4 +132,20 @@ if(process.env.NODE_ENV === "development") {
         }));
         return [200, null];
     });
+
+    /**
+     * Creator HTTP_PUT mock responses
+     */
+    mock.onPut(apiConfig.apis.creators.httpPUT.path.getRegex())
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+            formData: {
+                profile: `File.name: ${req.data.get("profile").name}`,
+                creator: req.data.get("creator"),
+            }
+        }));
+        return [200, null];
+    });
 }

@@ -1,8 +1,8 @@
-import { MouseEventHandler } from 'react';
+import { useState, MouseEventHandler } from 'react';
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
 import * as apiCall from '../api';
-// import { ModifyScheduleModal } from '.';
+import { ModifyCreatorModal } from '.';
 import { CreatorInfo } from '@/types';
 
 export type TableDataProps = CreatorInfo;
@@ -20,7 +20,17 @@ export function TableData(props: TableDataProps) {
         }
     };
 
+    const [modalShow, setModalShow] = useState(false);
+    const handleModalClose = () => setModalShow(false);
+    const handleModalShow = () => setModalShow(true);
+
     return (
+        <>
+            <ModifyCreatorModal
+                show={modalShow}
+                handleClose={handleModalClose}
+                id={props.id}
+            />
             <tr>
                 <td>{props.id}</td>
                 <td>
@@ -48,8 +58,7 @@ export function TableData(props: TableDataProps) {
                     </a>
                 </td>
                 <td>
-                    {/*<Button variant="outline-success" size="sm" onClick={handleModalShow}>*/}
-                    <Button variant="outline-success" size="sm" >
+                    <Button variant="outline-success" size="sm" onClick={handleModalShow}>
                         수정
                     </Button>
                     {" "}
@@ -58,5 +67,6 @@ export function TableData(props: TableDataProps) {
                     </Button>
                 </td>
             </tr>
+        </>
     );
 }

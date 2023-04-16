@@ -8,13 +8,13 @@ export type GetCreatorsResponseDTO = {
     content: Array<CreatorInfo>,
 };
 
-export function getCreators(currentPage: string): Promise<GetCreatorsResponseDTO> {
+export function getCreators(page: string|null): Promise<GetCreatorsResponseDTO> {
     return axios.get(apiConfig.apis.creators.httpGET, {
         headers: {
-            Authorization: getCookie(cookieConfig.names.accessToken),
+            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
         },
         params: {
-            currentPage,
+            page: page || "1",
         },
     });
 }

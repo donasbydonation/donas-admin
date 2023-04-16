@@ -2,18 +2,19 @@ import { axios, apiConfig } from '@/utils/axios';
 import { cookieConfig, getCookie } from '@/utils/cookie';
 import { ScheduleInfo } from '@/types';
 
-type Schedule = Omit<ScheduleInfo, "id"|"creator"|"bannerImage">;
-
+export type ModifyScheduleRequestDTO = {
+    banner: File,
+    schedule: Omit<ScheduleInfo, "id"|"creator"|"bannerImage">,
+};
 export type ModifyScheduleResponseDTO = null;
 
 export function modifySchedule(
     id: number,
-    banner: File,
-    schedule: Schedule,
+    body: ModifyScheduleRequestDTO,
 ): Promise<ModifyScheduleResponseDTO> {
     const formData = new FormData();
-    formData.append("banner", banner);
-    formData.append("schedule", JSON.stringify(schedule));
+    formData.append("banner", body.banner);
+    formData.append("schedule", JSON.stringify(body.schedule));
 
     return axios.put(apiConfig.apis.schedules.httpPUT.path.getString(id), formData, {
         headers: {

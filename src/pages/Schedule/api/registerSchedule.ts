@@ -2,17 +2,16 @@ import { axios, apiConfig } from '@/utils/axios';
 import { cookieConfig, getCookie } from '@/utils/cookie';
 import { ScheduleInfo } from '@/types';
 
-type Schedule = Omit<ScheduleInfo, "id"|"bannerImage">;
-
+export type RegisterScheduleRequestDTO = {
+    banner: File
+    schedule: Omit<ScheduleInfo, "id"|"bannerImage">,
+};
 export type RegisterScheduleResponseDTO = null;
 
-export function registerSchedule(
-    banner: File,
-    schedule:Schedule 
-): Promise<RegisterScheduleResponseDTO> {
+export function registerSchedule(body: RegisterScheduleRequestDTO): Promise<RegisterScheduleResponseDTO> {
     const formData = new FormData();
-    formData.append("banner", banner);
-    formData.append("schedule", JSON.stringify(schedule));
+    formData.append("banner", body.banner);
+    formData.append("schedule", JSON.stringify(body.schedule));
 
     return axios.post(apiConfig.apis.schedules.httpPOST, formData, {
         headers: {

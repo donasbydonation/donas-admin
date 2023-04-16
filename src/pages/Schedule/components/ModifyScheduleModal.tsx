@@ -21,11 +21,13 @@ export function ModifyScheduleModal(props: {
         e.preventDefault();
         apiCall.modifySchedule(
             props.id,
-            (input("modify-schedule-banner-image").files as FileList)[0],
             {
-                name: input("modify-schedule-name").value,
-                description: input("modify-schedule-description").value,
-                datetime: toISOString(input("modify-schedule-date").value),
+                banner: (input("modify-schedule-banner-image").files as FileList)[0],
+                schedule: {
+                    name: input("modify-schedule-name").value,
+                    description: input("modify-schedule-description").value,
+                    datetime: toISOString(input("modify-schedule-date").value),
+                },
             },
         ).then(() => {
             alert("수정되었습니다.");

@@ -15,8 +15,7 @@ export default function Creator() {
     const [searchParams] = useSearchParams();
 
     const onPageChanged = () => {
-        const currentPage = searchParams.get("page") || "1";
-        apiCall.getCreators(currentPage).then(body => {
+        apiCall.getCreators(searchParams.get("page")).then(body => {
             setPages(Array.from({length: body.totalPages}, (_, i) => i + 1));
             setCreators(body.content);
         });
@@ -45,12 +44,13 @@ export default function Creator() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>등록 번호</th>
-                            <th>프로필 이미지</th>
-                            <th>크리에이터 이름</th>
-                            <th>유튜브 채널 링크</th>
-                            <th>트위치 방송국 링크</th>
-                            <th>아프리카 방송국 링크</th>
+                            <th style={{ width: "6%" }}>등록 번호</th>
+                            <th style={{ width: "8%" }}>프로필 이미지</th>
+                            <th style={{ width: "10%" }}>크리에이터 이름</th>
+                            <th style={{ width: "22%" }}>유튜브 채널 링크</th>
+                            <th style={{ width: "22%" }}>트위치 방송국 링크</th>
+                            <th style={{ width: "22%" }}>아프리카 방송국 링크</th>
+                            <th style={{ width: "10%" }}>수정 / 삭제</th>
                         </tr>
                     </thead>
                     <tbody>

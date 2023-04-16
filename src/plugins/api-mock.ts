@@ -23,12 +23,12 @@ if(process.env.NODE_ENV === "development") {
      * Creators HTTP_GET mock responses
      */
     for (let i = 0; i < data.creatorPages.length; i++) {
-        mock.onGet(apiConfig.apis.creators.httpGET, {params: {currentPage: `${i + 1}`}})
+        mock.onGet(apiConfig.apis.creators.httpGET, {params: {page: `${i + 1}`}})
         .reply((req) => {
             console.log(JSON.stringify({
                 timestamp: (new Date()).toString(),
                 url: req.url,
-                params: `?currentPage=${req.params.currentPage}`,
+                params: `?page=${req.params.page}`,
             }));
             return [200, data.creatorPages[i]];
         });
@@ -43,11 +43,8 @@ if(process.env.NODE_ENV === "development") {
             timestamp: (new Date()).toString(),
             url: req.url,
             formData: {
-                profileImage: `File.name: ${req.data.get("profileImage").name}`,
-                name: req.data.get("name"),
-                youtubeURL: req.data.get("youtubeURL"),
-                twitchURL: req.data.get("twitchURL"),
-                africaURL: req.data.get("africaURL"),
+                profile: `File.name: ${req.data.get("profile").name}`,
+                creatorInfo: req.data.get("creatorInfo"),
             }
         }));
         return [201, null];

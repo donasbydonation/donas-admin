@@ -7,7 +7,7 @@ export type GetAllCreatorsResponseDTO = Array<CreatorInfoShort>;
 export function getAllCreators(): Promise<GetAllCreatorsResponseDTO> {
     return axios.get(apiConfig.apis.creators.all.httpGET, {
         headers: {
-            Authorization: getCookie(cookieConfig.names.accessToken),
+            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
         },
     });
 }

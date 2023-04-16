@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import * as data from './data';
 
 if(process.env.NODE_ENV === "development") {
-    console.log("Axios API Mock running");
+    console.warn("Axios API Mock running");
     const mock = new MockAdapter(axios);
 
     /**
@@ -16,7 +16,7 @@ if(process.env.NODE_ENV === "development") {
             url: req.url,
             body: req.data,
         }));
-        return [200, data.login];
+        return [201, data.login];
     });
 
     /**
@@ -50,7 +50,7 @@ if(process.env.NODE_ENV === "development") {
                 africaURL: req.data.get("africaURL"),
             }
         }));
-        return [200, null];
+        return [201, null];
     });
 
     /**
@@ -84,6 +84,34 @@ if(process.env.NODE_ENV === "development") {
      * Schedule HTTP_POST mock responses
      */
     mock.onPost(apiConfig.apis.schedules.httpPOST)
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+            formData: {
+                banner: `File.name: ${req.data.get("banner").name}`,
+                schedule: req.data.get("schedule"),
+            }
+        }));
+        return [201, null];
+    });
+
+    /**
+     * Schedule HTTP_DELETE mock response
+     */
+    mock.onDelete(apiConfig.apis.schedules.httpDELETE.path.getRegex())
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+        }));
+        return [200, null];
+    });
+
+    /**
+     * Schedule HTTP_PUT mock responses
+     */
+    mock.onPut(apiConfig.apis.schedules.httpPUT.path.getRegex())
     .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),

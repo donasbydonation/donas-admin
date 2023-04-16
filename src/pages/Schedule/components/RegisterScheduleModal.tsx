@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
+import { toISOString } from '@/utils/datetime';
 import { CreatorInfoShort } from '@/types';
 
 export function RegisterScheduleModal(props: {show: boolean, handleClose: () => void}) {
@@ -14,18 +15,20 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-        apiCall.registerSchedule({
-            creator: {
-                id: parseInt(input("register-schedule-creator").value),
-            },
-            bannerImage: (input("register-schedule-banner-image").files as FileList)[0],
-            name: input("register-schedule-name").value,
-            description: input("register-schedule-description").value,
-            datetime: new Date(input("register-schedule-date").value).toISOString(),
-        }).then(() => {
-            alert("등록되었습니다.");
-        }).catch((err) => {
-            alert("등록에 실패하였습니다.");
+        apiCall.registerSchedule(
+            (input("register-schedule-banner-image").files as FileList)[0],
+            {
+                creator: {
+                    id: parseInt(input("register-schedule-creator").value),
+                },
+                name: input("register-schedule-name").value,
+                description: input("register-schedule-description").value,
+                datetime: toISOString(input("register-schedule-date").value),
+            }
+        ).then(() => {
+            alert("추가되었습니다.");
+        }).catch(() => {
+            alert("추가 실패하였습니다.");
         }).finally(() => {
             props.handleClose();
         });
@@ -35,7 +38,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
     useEffect(() => {
         apiCall.getAllCreators().then(body => {
             setAllCreators(body);
-        }).catch((err) => {
+        }).catch(() => {
             alert("크리에이터 조회에 실패했습니다.");
         });
     }, []);
@@ -62,12 +65,12 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
                     <Form.Group className="mb-3" controlId="register-schedule-banner-image">
                         <Form.Label>방송 배너 이미지</Form.Label>
-                        <Form.Control type="file" placeholder="방송 배너 이미지" />
+                        <Form.Control type="file" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-schedule-name">
                         <Form.Label>방송 제목</Form.Label>
-                        <Form.Control type="text" placeholder="방송 제목" />
+                        <Form.Control type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-schedule-description">
@@ -77,7 +80,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
 
                     <Form.Group className="mb-3" controlId="register-schedule-date">
                         <Form.Label>방송 시간</Form.Label>
-                        <Form.Control type="datetime-local" placeholder="방송 시간" />
+                        <Form.Control type="datetime-local" />
                     </Form.Group>
                 </Modal.Body>
 

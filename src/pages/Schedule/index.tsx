@@ -34,7 +34,7 @@ export default function Schedule() {
         <>
             <RegisterScheduleModal show={modalShow} handleClose={handleModalClose} />
             <Card.Body>
-                <Card.Title>스케줄 관리</Card.Title>
+                <Card.Title>방송 스케줄 관리</Card.Title>
                 <div className="mb-3 d-flex justify-content-between">
                     <Pagination className="mb-0">
                         {pages.map((page, idx) => (
@@ -46,12 +46,13 @@ export default function Schedule() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>등록 번호</th>
-                            <th>크리에이터 이름</th>
-                            <th>방송 배너 이미지</th>
-                            <th>방송 제목</th>
-                            <th>방송 상세 설명</th>
-                            <th>방송 시간</th>
+                            <th style={{ width: "6%" }}>등록 번호</th>
+                            <th style={{ width: "10%" }}>크리에이터 이름</th>
+                            <th style={{ width: "14%" }}>방송 배너 이미지</th>
+                            <th style={{ width: "20%" }}>방송 제목</th>
+                            <th style={{ width: "20%" }}>방송 상세 설명</th>
+                            <th style={{ width: "20%" }}>방송 시간</th>
+                            <th style={{ width: "10%" }}>수정 / 삭제</th>
                         </tr>
                     </thead>
                     <tbody>

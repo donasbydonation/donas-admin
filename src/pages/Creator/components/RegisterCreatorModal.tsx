@@ -41,27 +41,27 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
                 <Modal.Body>
                     <Form.Group className="mb-3" controlId="register-creator-profile-image">
                         <Form.Label>프로필 이미지</Form.Label>
-                        <Form.Control type="file" placeholder="" />
+                        <Form.Control type="file" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-creator-name">
                         <Form.Label>크리에이터 이름</Form.Label>
-                        <Form.Control type="url" placeholder="Creator name" />
+                        <Form.Control type="url" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-creator-youtube-url">
                         <Form.Label>유튜브 채널 링크</Form.Label>
-                        <Form.Control type="url" placeholder="YouTube URL" />
+                        <Form.Control type="url" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-creator-twitch-url">
                         <Form.Label>트위치 방송국 링크</Form.Label>
-                        <Form.Control type="url" placeholder="Twitch URL" />
+                        <Form.Control type="url" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="register-creator-africa-url">
                         <Form.Label>아프리카 방송국 링크</Form.Label>
-                        <Form.Control type="url" placeholder="Africa URL" />
+                        <Form.Control type="url" />
                     </Form.Group>
                 </Modal.Body>
 

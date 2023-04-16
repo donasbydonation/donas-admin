@@ -37,7 +37,7 @@ export function TableData(props: TableDataProps) {
                 <td>{props.creator.name}</td>
                 <td>
                     <Image
-                        src={props.bannerImage as string}
+                        src={props.bannerImage}
                         width={128}
                         height={64}
                         rounded

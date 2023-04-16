@@ -120,4 +120,16 @@ if(process.env.NODE_ENV === "development") {
         }));
         return [200, null];
     });
+
+    /**
+     * Creator HTTP_DELETE mock response
+     */
+    mock.onDelete(apiConfig.apis.creators.httpDELETE.path.getRegex())
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+        }));
+        return [200, null];
+    });
 }

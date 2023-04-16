@@ -9,6 +9,12 @@ export const apiConfig = {
             all: {
                 httpGET: "/api/v1/creator-info/all",
             },
+            httpDELETE: {
+                path: {
+                    getString: (id: number) => (`/api/v1/creator/${id}`),
+                    getRegex: () => (/\/api\/v1\/creator\/\d+/),
+                },
+            },
         },
         schedules: {
             httpGET: "/api/v1/schedules",

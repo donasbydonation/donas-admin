@@ -34,4 +34,8 @@ RUN yarn build
 # Image
 # -------------------------
 FROM nginx:stable-alpine3.17-slim
+
+COPY default.conf.template /etc/nginx/templates/
 COPY --from=builder /app/build /usr/share/nginx/html
+
+ENV APP_ADM_CONTAINER_PORT=8000

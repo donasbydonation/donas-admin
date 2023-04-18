@@ -18,9 +18,9 @@ if(process.env.NODE_ENV === "development") {
         }));
 
         if (JSON.parse(req.data).username === "invalid") {
-            return [401, data.unauthorized]
+            return [401, data.login.unauthorized]
         } else {
-            return [201, data.login];
+            return [201, data.login.success];
         }
     });
 
@@ -36,7 +36,12 @@ if(process.env.NODE_ENV === "development") {
                 url: req.url,
                 params: `?page=${req.params.page}`,
             }));
-            return [200, data.creatorPages[i]];
+
+            if (req.headers?.Authorization !== `Bearer ${data.login.success.accessToken}`) {
+                return [401, data.login.unauthorized];
+            } else {
+                return [200, data.creatorPages[i]];
+            }
         });
     }
 

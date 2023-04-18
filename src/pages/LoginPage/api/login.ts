@@ -1,14 +1,17 @@
 import { axios, apiConfig } from '@/utils/axios';
+import { ErrorResponseDTO } from '@/types';
 
 export type LoginRequestDto = {
-    id: string,
-    pw: string,
+    username: string,
+    password: string,
 };
 
-export type LoginResponseDTO = {
+export type LoginSuccessResponseDTO = {
     accessToken: string,
     refreshToken: string,
 };
+
+export type LoginResponseDTO = LoginSuccessResponseDTO|ErrorResponseDTO;
 
 export function login(data: LoginRequestDto): Promise<LoginResponseDTO> {
     return axios.post(apiConfig.apis.login.httpPOST, data);

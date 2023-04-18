@@ -27,11 +27,12 @@ export default function LoginPage() {
         e.preventDefault();
 
         apiCall.login({
-            id: input("login-id").value,
-            pw: input("login-pw").value,
-        }).then(body => {
-            setCookie(cookieConfig.names.accessToken, body.accessToken);
-            setCookie(cookieConfig.names.refreshToken, body.refreshToken);
+            username: input("login-id").value,
+            password: input("login-pw").value,
+        }).then((body) => {
+            const refined = body as apiCall.LoginSuccessResponseDTO;
+            setCookie(cookieConfig.names.accessToken, refined.accessToken);
+            setCookie(cookieConfig.names.refreshToken, refined.refreshToken);
             navigate("/");
         }).catch(err => {
             alert("앙틀렸띠");

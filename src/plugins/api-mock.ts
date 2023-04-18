@@ -16,10 +16,16 @@ if(process.env.NODE_ENV === "development") {
             url: req.url,
             body: req.data,
         }));
-        return [201, data.login];
+
+        if (JSON.parse(req.data).username === "invalid") {
+            return [401, data.unauthorized]
+        } else {
+            return [201, data.login];
+        }
     });
 
     /**
+     *
      * Creators HTTP_GET mock responses
      */
     for (let i = 0; i < data.creatorPages.length; i++) {

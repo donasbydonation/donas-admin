@@ -29,10 +29,9 @@ export default function LoginPage() {
         apiCall.login({
             username: input("login-id").value,
             password: input("login-pw").value,
-        }).then((body) => {
-            const refined = body as apiCall.LoginSuccessResponseDTO;
-            setCookie(cookieConfig.names.accessToken, refined.accessToken);
-            setCookie(cookieConfig.names.refreshToken, refined.refreshToken);
+        }).then(body => {
+            setCookie(cookieConfig.names.accessToken, body.accessToken);
+            setCookie(cookieConfig.names.refreshToken, body.refreshToken);
             navigate("/");
         }).catch(err => {
             alert("앙틀렸띠");

@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { cookieConfig, getCookie } from '@/utils/cookie';
 
 export const apiConfig = {
     baseURL: "https://donas.me",
@@ -55,10 +56,21 @@ axios.interceptors.response.use(
     (response) => {
         return response.data;
     },
-
     (error) => {
         const message = error.response?.data?.message || error.message;
-        console.error(message);
+        if (error.response?.status === 401) {
+            console.warn(message);
+        } else {
+            console.error(message);
+        }
         return Promise.reject(error);
     }
 );
+
+axios.interceptors.request.use((config) => {
+    const token = getCookie(cookieConfig.names.accessToken);
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});

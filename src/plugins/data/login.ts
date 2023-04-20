@@ -9,12 +9,12 @@ type LoginMockResponseDTO = {
 
 export const login: LoginMockResponseDTO = {
     success: {
-        "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY3NjM1MTUwNSwiZXhwIjoxNjc2MzUyMTA1fQ.m9zrhu9WiwkxUjM1arb9fSHhq06ZFmmNRxGGhFXenyJ3RGmU4p4QbaiN-lNXdp_hUR_WJyuOF9-46s2cQQ4NfA",
-        "refreshToken": "538f6627-5ea5-4899-bda3-134a9988a183",
+        "accessToken": "success-access-token",
+        "refreshToken": "success-refresh-token",
     },
     refresh: {
-        "accessToken": "qweqweqwewqewqeqeqed.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY3NjM1MTUwNSwiZXhwIjoxNjc2MzUyMTA1fQ.m9zrhu9WiwkxUjM1arb9fSHhq06ZFmmNRxGGhFXenyJ3RGmU4p4QbaiN-lNXdp_hUR_WJyuOF9-46s2cQQ4NfA",
-        "refreshToken": "515f6549-136a-4afa-9e07-14e5ebc79c9c",
+        "accessToken": "refresh-access-token",
+        "refreshToken": "refresh-refresh-token",
     },
     unauthorized: {
       "name": "UNAUTHORIZED",

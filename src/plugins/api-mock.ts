@@ -1,6 +1,7 @@
 import { axios, apiConfig } from '@/utils/axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as data from './data';
+import testing from './testing.t';
 
 if(process.env.NODE_ENV === "development") {
     console.warn("Axios API Mock running");
@@ -17,10 +18,28 @@ if(process.env.NODE_ENV === "development") {
             body: req.data,
         }));
 
-        if (JSON.parse(req.data).username === "invalid") {
+        if (testing.login.unauthorizedForInvaidUsername(req)) {
             return [401, data.login.unauthorized]
         } else {
             return [201, data.login.success];
+        }
+    });
+
+    /**
+     * RefreshToken HTTP_POST mock response
+     */
+    mock.onPost(apiConfig.apis.refresh.httpPOST)
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+            body: req.data,
+        }));
+
+        if (testing.refresh.unauthorizedForInvaidRefreshToken(req)) {
+            return [401, data.login.unauthorized]
+        } else {
+            return [201, data.login.refresh];
         }
     });
 
@@ -37,7 +56,7 @@ if(process.env.NODE_ENV === "development") {
                 params: `?page=${req.params.page}`,
             }));
 
-            if (req.headers?.Authorization !== `Bearer ${data.login.success.accessToken}`) {
+            if (testing.creators.unauthorizedForInvalidAccessToken(req)) {
                 return [401, data.login.unauthorized];
             } else {
                 return [200, data.creatorPages[i]];

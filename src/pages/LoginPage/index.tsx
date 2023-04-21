@@ -26,12 +26,15 @@ export default function LoginPage() {
     const handleSubmit = (e: FormEvent<HTMLButtonElement>)  => {
         e.preventDefault();
 
+        const username = input("login-id").value;
+
         apiCall.login({
-            username: input("login-id").value,
+            username,
             password: input("login-pw").value,
         }).then(body => {
             setCookie(cookieConfig.names.accessToken, body.accessToken);
             setCookie(cookieConfig.names.refreshToken, body.refreshToken);
+            setCookie(cookieConfig.names.username, username);
             navigate("/");
         }).catch(err => {
             alert("앙틀렸띠");

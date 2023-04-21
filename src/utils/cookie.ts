@@ -4,6 +4,7 @@ export const cookieConfig = {
     names: {
         accessToken: "access-token",
         refreshToken: "refresh-token",
+        username: "username",
     },
     setOptions: {
         path: "/",

@@ -1,5 +1,6 @@
-import Axios from 'axios';
-import { cookieConfig, getCookie } from '@/utils/cookie';
+import Axios, { AxiosResponse } from 'axios';
+import { cookieConfig, getCookie, setCookie } from '@/utils/cookie';
+import { LoginResponseDTO } from '@/pages/LoginPage/api';
 
 export const apiConfig = {
     baseURL: "https://donas.me",
@@ -42,6 +43,9 @@ export const apiConfig = {
         login: {
             httpPOST: "/api/v1/login",
         },
+        refresh: {
+            httpPOST: "/api/v1/refresh",
+        },
     },
 };
 
@@ -57,9 +61,26 @@ axios.interceptors.response.use(
         return response.data;
     },
     (error) => {
-        const message = error.response?.data?.message || error.message;
-        if (error.response?.status === 401) {
-            console.warn(message);
+        const message = error.response.data?.message || error.message;
+        const refreshRequired = (res: AxiosResponse):boolean => {
+            return (error.response.config.url !== apiConfig.apis.refresh.httpPOST) &&
+                !!getCookie(cookieConfig.names.refreshToken);
+        };
+
+        if (error.response.status === 401) {
+            if (refreshRequired(error.response)) {
+                return axios.post(apiConfig.apis.refresh.httpPOST, {
+                    refreshToken: getCookie(cookieConfig.names.refreshToken),
+                    username: getCookie(cookieConfig.names.username),
+                }).then((res: unknown) => {
+                    const body = res as LoginResponseDTO; // type conversion
+                    setCookie(cookieConfig.names.accessToken, body.accessToken);
+                    setCookie(cookieConfig.names.refreshToken, body.refreshToken);
+                    return axios(error.response.config);
+                });
+            } else {
+                console.warn(message);
+            }
         } else {
             console.error(message);
         }

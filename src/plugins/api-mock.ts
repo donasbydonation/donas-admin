@@ -36,10 +36,10 @@ if(process.env.NODE_ENV === "development") {
             body: req.data,
         }));
 
-        if (testing.refresh.unauthorizedForInvaidRefreshToken(req)) {
-            return [401, data.login.unauthorized]
-        } else {
+        if (testing.refresh.authorizedForValidRefreshToken(req)) {
             return [201, data.login.refresh];
+        } else {
+            return [401, data.login.unauthorized];
         }
     });
 
@@ -53,6 +53,7 @@ if(process.env.NODE_ENV === "development") {
             console.log(JSON.stringify({
                 timestamp: (new Date()).toString(),
                 url: req.url,
+                auth: req.headers?.Authorization,
                 params: `?page=${req.params.page}`,
             }));
 

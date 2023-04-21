@@ -8,9 +8,11 @@ const testing = {
         ),
     },
     refresh: {
-        unauthorizedForInvaidRefreshToken: (req: AxiosRequestConfig) => (
-            JSON.parse(req.data).refreshToken === "invalid"
-        ),
+        authorizedForValidRefreshToken: (req: AxiosRequestConfig) => {
+            const refreshToken = JSON.parse(req.data).refreshToken;
+            return (refreshToken === data.login.success.refreshToken) ||
+                (refreshToken === data.login.refresh.refreshToken);
+        },
     },
     creators: {
         unauthorizedForInvalidAccessToken: (req: AxiosRequestConfig) => (

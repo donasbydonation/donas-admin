@@ -1,5 +1,4 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { cookieConfig, getCookie } from '@/utils/cookie';
 import { CreatorInfo } from '@/types';
 
 export type RegisterCreatorRequestDTO = {
@@ -17,7 +16,6 @@ export function registerCreator(body: RegisterCreatorRequestDTO): Promise<Regist
     return axios.post(apiConfig.apis.creators.httpPOST, formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
             "Content-Type": "multipart/form-data",
         },
     });

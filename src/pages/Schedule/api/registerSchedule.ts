@@ -1,5 +1,4 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { cookieConfig, getCookie } from '@/utils/cookie';
 import { ScheduleInfo } from '@/types';
 
 export type RegisterScheduleRequestDTO = {
@@ -16,7 +15,6 @@ export function registerSchedule(body: RegisterScheduleRequestDTO): Promise<Regi
     return axios.post(apiConfig.apis.schedules.httpPOST, formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
             "Content-Type": 'multipart/form-data',
         },
     });

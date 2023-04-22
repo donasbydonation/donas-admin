@@ -1,5 +1,9 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { PlatformInfo } from '@/types';
+
+type PlatformInfo = {
+    platform: "afreecatv"|"twitch"|"youtube",
+    broadcastLink: string,
+};
 
 export type ModifyCreatorRequestDTO = {
     profile: File,
@@ -9,6 +13,7 @@ export type ModifyCreatorRequestDTO = {
         platforms: PlatformInfo[],
     },
 };
+
 export type ModifyCreatorResponseDTO = number;
 
 export function modifyCreator(body: ModifyCreatorRequestDTO): Promise<ModifyCreatorResponseDTO> {

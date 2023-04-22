@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
-import { PlatformName } from '@/types';
 
 export function RegisterCreatorModal(props: {show: boolean, handleClose: () => void}) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -21,15 +20,15 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
                 name: input("register-creator-name").value,
                 platforms: [
                     {
-                        platform : PlatformName.Afreeca,
+                        platform : "afreecatv",
                         broadcastLink: input("register-creator-africa-url").value,
                     },
                     {
-                        platform : PlatformName.Twitch,
+                        platform : "twitch",
                         broadcastLink: input("register-creator-twitch-url").value,
                     },
                     {
-                        platform : PlatformName.YouTube,
+                        platform : "youtube",
                         broadcastLink: input("register-creator-youtube-url").value,
                     },
                 ],

@@ -1,9 +1,12 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { CreatorInfo } from '@/types';
+import { PlatformInfo } from '@/types';
 
 export type RegisterCreatorRequestDTO = {
     profile: File,
-    creatorInfo: Omit<CreatorInfo, "id"|"profileImage">
+    creatorInfo: {
+        name: string,
+        platforms: PlatformInfo[],
+    },
 };
 
 export type RegisterCreatorResponseDTO = null;

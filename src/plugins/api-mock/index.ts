@@ -73,6 +73,7 @@ if(process.env.NODE_ENV === "development") {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
             formData: {
                 profile: `File.name: ${req.data.get("profile").name}`,
                 creatorInfo: req.data.get("creatorInfo"),

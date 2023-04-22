@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
+import { PlatformName } from '@/types';
 
 export function RegisterCreatorModal(props: {show: boolean, handleClose: () => void}) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -18,9 +19,20 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
             profile: (input("register-creator-profile-image").files as FileList)[0],
             creatorInfo: {
                 name: input("register-creator-name").value,
-                youtubeURL: input("register-creator-youtube-url").value,
-                twitchURL: input("register-creator-twitch-url").value,
-                africaURL: input("register-creator-africa-url").value,
+                platforms: [
+                    { 
+                        platform : PlatformName.Afreeca,
+                        broadcastLink: input("register-creator-africa-url").value,
+                    },
+                    { 
+                        platform : PlatformName.Twitch,
+                        broadcastLink: input("register-creator-twitch-url").value,
+                    },
+                    { 
+                        platform : PlatformName.YouTube,
+                        broadcastLink: input("register-creator-youtube-url").value,
+                    },
+                ],
             },
         }).then(() => {
             alert("등록되었습니다.");

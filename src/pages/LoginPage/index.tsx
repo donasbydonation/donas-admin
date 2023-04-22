@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
-import * as apiCall from './api';
+import * as auth from '@/utils/auth';
 import { cookieConfig, setCookie } from '@/utils/cookie';
 import { input } from '@/utils/getElementById';
 
@@ -28,7 +28,7 @@ export default function LoginPage() {
 
         const username = input("login-id").value;
 
-        apiCall.login({
+        auth.getAccessToken({
             username,
             password: input("login-pw").value,
         }).then(body => {

@@ -1,9 +1,9 @@
-import { LoginResponseDTO } from '@/pages/LoginPage/api';
+import { GetAccessTokenResponseDTO } from '@/utils/auth';
 import { ErrorResponseDTO } from '@/types';
 
 type LoginMockResponseDTO = {
-    success: LoginResponseDTO,
-    refresh: LoginResponseDTO,
+    success: GetAccessTokenResponseDTO,
+    refresh: GetAccessTokenResponseDTO,
     unauthorized: ErrorResponseDTO,
 };
 

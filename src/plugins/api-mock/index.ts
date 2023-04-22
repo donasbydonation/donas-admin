@@ -1,7 +1,7 @@
 import { axios, apiConfig } from '@/utils/axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as data from './data';
-import testing from './testing.t';
+import testing from './index.t';
 
 if(process.env.NODE_ENV === "development") {
     console.warn("Axios API Mock running");

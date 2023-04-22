@@ -1,6 +1,10 @@
+import { useState, useEffect, ReactNode } from 'react';
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import { useCookies } from 'react-cookie';
+import { isAuth, authConfig, deleteAccessToken } from '@/utils/auth';
 
 const StyledNavbar = styled(Navbar)`
     background-color: #FF3363;
@@ -8,6 +12,36 @@ const StyledNavbar = styled(Navbar)`
 `;
 
 export default function Header() {
+    const [loginButton, setLoginButton] = useState<ReactNode>();
+    const [cookies, , removeCookies] = useCookies([
+        authConfig.cookies.names.accessToken,
+        authConfig.cookies.names.refreshToken,
+        authConfig.cookies.names.username,
+    ]);
+
+    const onClickLogout = () => {
+        deleteAccessToken().then(body => {
+            removeCookies(authConfig.cookies.names.accessToken);
+            removeCookies(authConfig.cookies.names.refreshToken);
+            removeCookies(authConfig.cookies.names.username);
+        });
+    };
+
+    const onCookieChanged = () => {
+        if (isAuth()) {
+            setLoginButton(
+                <Button size="sm" variant="outline-light" onClick={onClickLogout}>
+                    Logout
+                </Button>
+            );
+        } else {
+            setLoginButton(null);
+        }
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(onCookieChanged, [cookies]);
+
     return (
         <StyledNavbar variant="light" fixed="top">
             <Container>
@@ -18,8 +52,8 @@ export default function Header() {
                         height="25"
                     />
                 </Navbar.Brand>
+                {loginButton}
             </Container>
         </StyledNavbar>
     );
 }
-

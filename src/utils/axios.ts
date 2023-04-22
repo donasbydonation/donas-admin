@@ -16,12 +16,7 @@ export const apiConfig = {
                     getRegex: () => (/\/api\/v1\/creator\/\d+/),
                 },
             },
-            httpPUT: {
-                path: {
-                    getString: (id: number) => (`/api/v1/creator/${id}`),
-                    getRegex: () => (/\/api\/v1\/creator\/\d+/),
-                },
-            },
+            httpPUT: "/api/v1/creator-infos",
         },
         schedules: {
             httpGET: "/api/v1/schedules",

@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
+import { PlatformName } from '@/types';
 
 export function ModifyCreatorModal(props: {
     show: boolean,
@@ -19,14 +20,25 @@ export function ModifyCreatorModal(props: {
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         apiCall.modifyCreator(
-            props.id,
             {
                 profile: (input("modify-creator-profile-image").files as FileList)[0],
-                creator: {
+                creatorInfo: {
+                    id: props.id,
                     name: input("modify-creator-name").value,
-                    youtubeURL: input("modify-creator-youtube-url").value,
-                    twitchURL: input("modify-creator-twitch-url").value,
-                    africaURL: input("modify-creator-africa-url").value,
+                    platforms: [
+                        {
+                            platform : PlatformName.Afreeca,
+                            broadcastLink: input("modify-creator-africa-url").value,
+                        },
+                        {
+                            platform : PlatformName.Twitch,
+                            broadcastLink: input("modify-creator-twitch-url").value,
+                        },
+                        {
+                            platform : PlatformName.YouTube,
+                            broadcastLink: input("modify-creator-youtube-url").value,
+                        },
+                    ],
                 },
             },
         ).then(() => {

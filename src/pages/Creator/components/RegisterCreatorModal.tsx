@@ -20,15 +20,15 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
             creatorInfo: {
                 name: input("register-creator-name").value,
                 platforms: [
-                    { 
+                    {
                         platform : PlatformName.Afreeca,
                         broadcastLink: input("register-creator-africa-url").value,
                     },
-                    { 
+                    {
                         platform : PlatformName.Twitch,
                         broadcastLink: input("register-creator-twitch-url").value,
                     },
-                    { 
+                    {
                         platform : PlatformName.YouTube,
                         broadcastLink: input("register-creator-youtube-url").value,
                     },

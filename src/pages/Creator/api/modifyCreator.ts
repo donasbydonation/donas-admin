@@ -1,21 +1,22 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { CreatorInfo } from '@/types';
+import { PlatformInfo } from '@/types';
 
 export type ModifyCreatorRequestDTO = {
     profile: File,
-    creator: Omit<CreatorInfo, "id"|"profileImage">,
+    creatorInfo: {
+        id: number,
+        name: string,
+        platforms: PlatformInfo[],
+    },
 };
-export type ModifyCreatorResponseDTO = null;
+export type ModifyCreatorResponseDTO = number;
 
-export function modifyCreator(
-    id: number,
-    body: ModifyCreatorRequestDTO,
-): Promise<ModifyCreatorResponseDTO> {
+export function modifyCreator(body: ModifyCreatorRequestDTO): Promise<ModifyCreatorResponseDTO> {
     const formData = new FormData();
     formData.append("profile", body.profile);
-    formData.append("creator", JSON.stringify(body.creator));
+    formData.append("creatorInfo", JSON.stringify(body.creatorInfo));
 
-    return axios.put(apiConfig.apis.creators.httpPUT.path.getString(id), formData, {
+    return axios.put(apiConfig.apis.creators.httpPUT, formData, {
         headers: {
             "Accept": "*/*",
             "Content-Type": 'multipart/form-data',

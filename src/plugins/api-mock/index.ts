@@ -168,16 +168,17 @@ if(process.env.NODE_ENV === "development") {
     /**
      * Creator HTTP_PUT mock responses
      */
-    mock.onPut(apiConfig.apis.creators.httpPUT.path.getRegex())
+    mock.onPut(apiConfig.apis.creators.httpPUT)
     .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
             formData: {
                 profile: `File.name: ${req.data.get("profile").name}`,
-                creator: req.data.get("creator"),
+                creatorInfo: req.data.get("creatorInfo"),
             }
         }));
-        return [200, null];
+        return [200, req.data.get("creatorInfo").id];
     });
 }

@@ -1,11 +1,9 @@
 import { useRoutes, Navigate } from 'react-router-dom';
-import { getCookie, cookieConfig } from '@/utils/cookie';
 import LoginPage from '@/pages/LoginPage';
 import Dashboard from '@/pages/Dashboard';
+import { isAuth } from '@/utils/auth';
 
 export default function AppRoutes() {
-    const accessToken = getCookie(cookieConfig.names.accessToken);
-
     const protectedRoutes = [
         { path: "/", element: <Dashboard eventKey="/schedule" /> },
         { path: "/schedule", element: <Dashboard eventKey="/schedule" /> },
@@ -18,5 +16,5 @@ export default function AppRoutes() {
         { path: "*", element: <Navigate to="/login" /> },
     ];
 
-    return <>{useRoutes(accessToken ? protectedRoutes : publicRoutes)}</>;
+    return <>{useRoutes(isAuth() ? protectedRoutes : publicRoutes)}</>;
 };

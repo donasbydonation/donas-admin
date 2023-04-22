@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
-import * as auth from '@/utils/auth';
-import { cookieConfig, setCookie } from '@/utils/cookie';
+import { getAccessToken, authConfig } from '@/utils/auth';
 import { input } from '@/utils/getElementById';
+import { useCookies } from 'react-cookie';
 
 const StyledPage = styled.div`
     background-color: #FFE6EB;
@@ -22,19 +22,24 @@ const StyledForm = styled(Form)`
 
 export default function LoginPage() {
     const navigate = useNavigate();
+    const [, setCookie] = useCookies([
+        authConfig.cookies.names.accessToken,
+        authConfig.cookies.names.refreshToken,
+        authConfig.cookies.names.username,
+    ]);
 
     const handleSubmit = (e: FormEvent<HTMLButtonElement>)  => {
         e.preventDefault();
 
         const username = input("login-id").value;
 
-        auth.getAccessToken({
+        getAccessToken({
             username,
             password: input("login-pw").value,
         }).then(body => {
-            setCookie(cookieConfig.names.accessToken, body.accessToken);
-            setCookie(cookieConfig.names.refreshToken, body.refreshToken);
-            setCookie(cookieConfig.names.username, username);
+            setCookie(authConfig.cookies.names.accessToken, body.accessToken);
+            setCookie(authConfig.cookies.names.refreshToken, body.refreshToken);
+            setCookie(authConfig.cookies.names.username, username);
             navigate("/");
         }).catch(err => {
             alert("앙틀렸띠");

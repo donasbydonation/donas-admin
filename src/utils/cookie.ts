@@ -15,3 +15,7 @@ export function setCookie(name: string, value: string) {
 export function getCookie(name: string): string {
     return cookies.get(name);
 }
+
+export function removeCookie(name: string) {
+    return cookies.remove(name);
+}

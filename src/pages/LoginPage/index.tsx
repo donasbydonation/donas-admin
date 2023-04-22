@@ -41,8 +41,6 @@ export default function LoginPage() {
             setCookie(authConfig.cookies.names.refreshToken, body.refreshToken);
             setCookie(authConfig.cookies.names.username, username);
             navigate("/");
-        }).catch(err => {
-            alert("앙틀렸띠");
         });
     }
 

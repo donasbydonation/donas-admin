@@ -25,6 +25,8 @@ export default function Header() {
             removeCookies(authConfig.cookies.names.refreshToken);
             removeCookies(authConfig.cookies.names.username);
         });
+        window.alert("로그아웃 되었습니다.");
+        window.location.href = "/login";
     };
 
     const onCookieChanged = () => {

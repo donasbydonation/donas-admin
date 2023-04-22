@@ -146,7 +146,7 @@ if(process.env.NODE_ENV === "development") {
             timestamp: (new Date()).toString(),
             url: req.url,
             formData: {
-                banner: `File.name: ${req.data.get("banner").name}`,
+                banner: `File.name := ${req.data.get("banner").name}`,
                 schedule: req.data.get("schedule"),
             }
         }));
@@ -158,11 +158,14 @@ if(process.env.NODE_ENV === "development") {
      */
     mock.onDelete(apiConfig.apis.creators.httpDELETE.path.getRegex())
     .reply((req) => {
+        const creatorId = parseInt(req.url?.split("/").pop() as string)
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
+            pathVariable: `creatorId := ${creatorId}`,
         }));
-        return [200, null];
+        return [200, creatorId];
     });
 
     /**

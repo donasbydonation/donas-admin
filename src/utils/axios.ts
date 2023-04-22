@@ -12,8 +12,8 @@ export const apiConfig = {
             },
             httpDELETE: {
                 path: {
-                    getString: (id: number) => (`/api/v1/creator/${id}`),
-                    getRegex: () => (/\/api\/v1\/creator\/\d+/),
+                    getString: (id: number) => (`/api/v1/creator-infos/${id}`),
+                    getRegex: () => (/\/api\/v1\/creator-infos\/\d+/),
                 },
             },
             httpPUT: "/api/v1/creator-infos",

@@ -1,5 +1,4 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { cookieConfig, getCookie } from '@/utils/cookie';
 import { ScheduleInfo } from '@/types';
 
 export type ModifyScheduleRequestDTO = {
@@ -19,7 +18,6 @@ export function modifySchedule(
     return axios.put(apiConfig.apis.schedules.httpPUT.path.getString(id), formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
             "Content-Type": 'multipart/form-data',
         },
     });

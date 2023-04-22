@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import * as auth from './auth';
 
 export const apiConfig = {
     baseURL: "https://donas.me",
@@ -41,6 +42,9 @@ export const apiConfig = {
         login: {
             httpPOST: "/api/v1/login",
         },
+        refresh: {
+            httpPOST: "/api/v1/refresh",
+        },
     },
 };
 
@@ -51,14 +55,23 @@ export const axios = Axios.create({
     },
 });
 
+axios.interceptors.request.use(auth.setAuthorizationHeader);
+
 axios.interceptors.response.use(
     (response) => {
         return response.data;
     },
-
     (error) => {
-        const message = error.response?.data?.message || error.message;
-        console.error(message);
+        const message = error.response.data?.message || error.message;
+        if (error.response.status === 401) {
+            if (auth.isRefreshRequired(error.response)) {
+                return auth.refreshAccessToken(error.response.config);
+            } else {
+                console.warn(message);
+            }
+        } else {
+            console.error(message);
+        }
         return Promise.reject(error);
     }
 );

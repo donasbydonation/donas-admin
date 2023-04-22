@@ -1,5 +1,4 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { cookieConfig, getCookie } from '@/utils/cookie';
 import { CreatorInfo } from '@/types';
 
 export type ModifyCreatorRequestDTO = {
@@ -19,7 +18,6 @@ export function modifyCreator(
     return axios.put(apiConfig.apis.creators.httpPUT.path.getString(id), formData, {
         headers: {
             "Accept": "*/*",
-            "Authorization": `Bearer ${getCookie(cookieConfig.names.accessToken)}`,
             "Content-Type": 'multipart/form-data',
         },
     });

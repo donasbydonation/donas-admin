@@ -10,7 +10,8 @@ import { toISOString } from '@/utils/datetime';
 export function ModifyScheduleModal(props: {
     show: boolean,
     handleClose: () => void,
-    id: number
+    id: number,
+    creatorId: number,
 }) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
@@ -20,13 +21,14 @@ export function ModifyScheduleModal(props: {
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         apiCall.modifySchedule(
-            props.id,
             {
                 banner: (input("modify-schedule-banner-image").files as FileList)[0],
                 schedule: {
-                    name: input("modify-schedule-name").value,
+                    scheduleId: props.id,
+                    creatorId: props.creatorId,
+                    title: input("modify-schedule-name").value,
                     description: input("modify-schedule-description").value,
-                    datetime: toISOString(input("modify-schedule-date").value),
+                    scheduledTime: toISOString(input("modify-schedule-date").value),
                 },
             },
         ).then(() => {

@@ -16,8 +16,8 @@ export default function Schedule() {
 
     const onPageChanged = () => {
         apiCall.getSchedules(searchParams.get("page")).then(body => {
-            setPages(Array.from({length: body.context.totalPages}, (_, i) => i + 1));
-            setSchedules(body.content);
+            setPages(Array.from({length: body.totalPage}, (_, i) => i + 1));
+            setSchedules(body.schedules.map(apiCall.scheduleInfoShim));
         }).catch(() => {
             alert("스케줄 조회에 실패했습니다.");
         });

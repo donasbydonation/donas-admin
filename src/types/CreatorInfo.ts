@@ -6,8 +6,3 @@ export type CreatorInfo = {
     twitchURL: string,
     africaURL: string,
 };
-
-export type CreatorInfoShort = {
-    id: number,
-    name?: string,
-};

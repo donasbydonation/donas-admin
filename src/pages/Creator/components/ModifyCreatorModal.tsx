@@ -19,14 +19,25 @@ export function ModifyCreatorModal(props: {
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         apiCall.modifyCreator(
-            props.id,
             {
                 profile: (input("modify-creator-profile-image").files as FileList)[0],
-                creator: {
+                creatorInfo: {
+                    id: props.id,
                     name: input("modify-creator-name").value,
-                    youtubeURL: input("modify-creator-youtube-url").value,
-                    twitchURL: input("modify-creator-twitch-url").value,
-                    africaURL: input("modify-creator-africa-url").value,
+                    platforms: [
+                        {
+                            platform : "afreecatv",
+                            broadcastLink: input("modify-creator-africa-url").value,
+                        },
+                        {
+                            platform : "twitch",
+                            broadcastLink: input("modify-creator-twitch-url").value,
+                        },
+                        {
+                            platform : "youtube",
+                            broadcastLink: input("modify-creator-youtube-url").value,
+                        },
+                    ],
                 },
             },
         ).then(() => {

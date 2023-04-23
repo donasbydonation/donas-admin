@@ -1,9 +1,16 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { CreatorInfo } from '@/types';
+
+type PlatformInfo = {
+    platform: "afreecatv"|"twitch"|"youtube",
+    broadcastLink: string,
+};
 
 export type RegisterCreatorRequestDTO = {
     profile: File,
-    creatorInfo: Omit<CreatorInfo, "id"|"profileImage">
+    creatorInfo: {
+        name: string,
+        platforms: PlatformInfo[],
+    },
 };
 
 export type RegisterCreatorResponseDTO = null;

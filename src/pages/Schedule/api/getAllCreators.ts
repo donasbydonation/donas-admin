@@ -1,7 +1,11 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { CreatorInfoShort } from '@/types';
 
-export type GetAllCreatorsResponseDTO = Array<CreatorInfoShort>;
+type GetAllCreatorsResponseListItemDTO = {
+    id: number,
+    name: string,
+};
+
+export type GetAllCreatorsResponseDTO = GetAllCreatorsResponseListItemDTO[];
 
 export function getAllCreators(): Promise<GetAllCreatorsResponseDTO> {
     return axios.get(apiConfig.apis.creators.all.httpGET);

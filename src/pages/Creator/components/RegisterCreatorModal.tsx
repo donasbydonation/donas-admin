@@ -18,9 +18,20 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
             profile: (input("register-creator-profile-image").files as FileList)[0],
             creatorInfo: {
                 name: input("register-creator-name").value,
-                youtubeURL: input("register-creator-youtube-url").value,
-                twitchURL: input("register-creator-twitch-url").value,
-                africaURL: input("register-creator-africa-url").value,
+                platforms: [
+                    {
+                        platform : "afreecatv",
+                        broadcastLink: input("register-creator-africa-url").value,
+                    },
+                    {
+                        platform : "twitch",
+                        broadcastLink: input("register-creator-twitch-url").value,
+                    },
+                    {
+                        platform : "youtube",
+                        broadcastLink: input("register-creator-youtube-url").value,
+                    },
+                ],
             },
         }).then(() => {
             alert("등록되었습니다.");

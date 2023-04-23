@@ -1,10 +1,15 @@
 import { axios, apiConfig } from '@/utils/axios';
-import { ScheduleInfo } from '@/types';
 
 export type RegisterScheduleRequestDTO = {
-    banner: File
-    schedule: Omit<ScheduleInfo, "id"|"bannerImage">,
+    banner: File,
+    schedule: {
+        creatorId: number,
+        title: string,
+        description: string,
+        scheduledTime: string,
+    },
 };
+
 export type RegisterScheduleResponseDTO = null;
 
 export function registerSchedule(body: RegisterScheduleRequestDTO): Promise<RegisterScheduleResponseDTO> {

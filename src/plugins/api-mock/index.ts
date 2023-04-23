@@ -48,7 +48,7 @@ if(process.env.NODE_ENV === "development") {
      * Creators HTTP_GET mock responses
      */
     for (let i = 0; i < data.creatorPages.length; i++) {
-        mock.onGet(apiConfig.apis.creators.httpGET, {params: {page: `${i + 1}`}})
+        mock.onGet(apiConfig.apis.creators.httpGET, {params: {page: i, size: "10"}})
         .reply((req) => {
             console.log(JSON.stringify({
                 timestamp: (new Date()).toString(),
@@ -73,8 +73,9 @@ if(process.env.NODE_ENV === "development") {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
             formData: {
-                profile: `File.name: ${req.data.get("profile").name}`,
+                profile: `File.name := ${req.data.get("profile").name}`,
                 creatorInfo: req.data.get("creatorInfo"),
             }
         }));
@@ -85,7 +86,7 @@ if(process.env.NODE_ENV === "development") {
      * Schedules HTTP_GET mock responses
      */
     for (let i = 0; i < data.schedulePages.length; i++) {
-        mock.onGet(apiConfig.apis.schedules.httpGET, {params: {page: `${i + 1}`}})
+        mock.onGet(apiConfig.apis.schedules.httpGET, {params: {page: i, size: "10"}})
         .reply((req) => {
             console.log(JSON.stringify({
                 timestamp: (new Date()).toString(),
@@ -104,6 +105,7 @@ if(process.env.NODE_ENV === "development") {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
         }));
         return [200, data.allCreators];
     });
@@ -116,8 +118,9 @@ if(process.env.NODE_ENV === "development") {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
             formData: {
-                banner: `File.name: ${req.data.get("banner").name}`,
+                banner: `File.name := ${req.data.get("banner").name}`,
                 schedule: req.data.get("schedule"),
             }
         }));
@@ -129,23 +132,26 @@ if(process.env.NODE_ENV === "development") {
      */
     mock.onDelete(apiConfig.apis.schedules.httpDELETE.path.getRegex())
     .reply((req) => {
+        const scheduleId = parseInt(req.url?.split("/").pop() as string)
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
+            pathVariable: `scheduleId := ${scheduleId}`,
         }));
-        return [200, null];
+        return [200, scheduleId];
     });
 
     /**
      * Schedule HTTP_PUT mock responses
      */
-    mock.onPut(apiConfig.apis.schedules.httpPUT.path.getRegex())
+    mock.onPut(apiConfig.apis.schedules.httpPUT)
     .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
             formData: {
-                banner: `File.name: ${req.data.get("banner").name}`,
+                banner: `File.name := ${req.data.get("banner").name}`,
                 schedule: req.data.get("schedule"),
             }
         }));
@@ -157,26 +163,30 @@ if(process.env.NODE_ENV === "development") {
      */
     mock.onDelete(apiConfig.apis.creators.httpDELETE.path.getRegex())
     .reply((req) => {
+        const creatorId = parseInt(req.url?.split("/").pop() as string)
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
+            pathVariable: `creatorId := ${creatorId}`,
         }));
-        return [200, null];
+        return [200, creatorId];
     });
 
     /**
      * Creator HTTP_PUT mock responses
      */
-    mock.onPut(apiConfig.apis.creators.httpPUT.path.getRegex())
+    mock.onPut(apiConfig.apis.creators.httpPUT)
     .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
             formData: {
                 profile: `File.name: ${req.data.get("profile").name}`,
-                creator: req.data.get("creator"),
+                creatorInfo: req.data.get("creatorInfo"),
             }
         }));
-        return [200, null];
+        return [200, req.data.get("creatorInfo").id];
     });
 }

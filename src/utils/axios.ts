@@ -6,39 +6,29 @@ export const apiConfig = {
     baseURL: "https://donas.me",
     apis: {
         creators: {
-            httpGET: "/api/v1/creators",
-            httpPOST: "/api/v1/creator",
+            httpGET: "/api/v1/creator-infos",
+            httpPOST: "/api/v1/creator-infos",
             all: {
-                httpGET: "/api/v1/creator-info/all",
+                httpGET: "/api/v1/creator-infos/all",
             },
             httpDELETE: {
                 path: {
-                    getString: (id: number) => (`/api/v1/creator/${id}`),
-                    getRegex: () => (/\/api\/v1\/creator\/\d+/),
+                    getString: (id: number) => (`/api/v1/creator-infos/${id}`),
+                    getRegex: () => (/\/api\/v1\/creator-infos\/\d+/),
                 },
             },
-            httpPUT: {
-                path: {
-                    getString: (id: number) => (`/api/v1/creator/${id}`),
-                    getRegex: () => (/\/api\/v1\/creator\/\d+/),
-                },
-            },
+            httpPUT: "/api/v1/creator-infos",
         },
         schedules: {
             httpGET: "/api/v1/schedules",
-            httpPOST: "/api/v1/schedule",
+            httpPOST: "/api/v1/schedules",
             httpDELETE: {
                 path: {
                     getString: (id: number) => (`/api/v1/schedule/${id}`),
                     getRegex: () => (/\/api\/v1\/schedule\/\d+/),
                 },
             },
-            httpPUT: {
-                path: {
-                    getString: (id: number) => (`/api/v1/schedule/${id}`),
-                    getRegex: () => (/\/api\/v1\/schedule\/\d+/),
-                },
-            },
+            httpPUT: "/api/v1/schedules",
         },
         login: {
             httpPOST: "/api/v1/admin/login",

@@ -18,6 +18,8 @@ export default function Creator() {
         apiCall.getCreators(searchParams.get("page")).then(body => {
             setPages(Array.from({length: body.totalPage}, (_, i) => i + 1));
             setCreators(body.creatorInfos.map(apiCall.creatorInfoShim));
+        }).catch(() => {
+            alert("크리에이터 조회에 실패했습니다.");
         });
     };
 

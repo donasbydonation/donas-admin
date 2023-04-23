@@ -42,12 +42,6 @@ export function refreshAccessToken(config: AxiosRequestConfig) {
     });
 }
 
-export function deleteAccessToken() {
-    return axios.post(apiConfig.apis.logout.httpPOST, {
-        username: getCookie(authConfig.cookies.names.username),
-    });
-}
-
 // AXIOS Intercepter
 
 export function isRefreshRequired(res: AxiosResponse): boolean {

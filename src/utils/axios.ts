@@ -46,9 +46,6 @@ export const apiConfig = {
         refresh: {
             httpPOST: "/api/v1/refresh",
         },
-        logout: {
-            httpPOST: "/api/v1/logout",
-        },
     },
 };
 

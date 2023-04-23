@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { useCookies } from 'react-cookie';
-import { isAuth, authConfig, deleteAccessToken } from '@/utils/auth';
+import { isAuth, authConfig } from '@/utils/auth';
 
 const StyledNavbar = styled(Navbar)`
     background-color: #FF3363;
@@ -20,11 +20,9 @@ export default function Header() {
     ]);
 
     const onClickLogout = () => {
-        deleteAccessToken().then(body => {
-            removeCookies(authConfig.cookies.names.accessToken);
-            removeCookies(authConfig.cookies.names.refreshToken);
-            removeCookies(authConfig.cookies.names.username);
-        });
+        removeCookies(authConfig.cookies.names.accessToken);
+        removeCookies(authConfig.cookies.names.refreshToken);
+        removeCookies(authConfig.cookies.names.username);
         window.alert("로그아웃 되었습니다.");
         window.location.href = "/login";
     };

@@ -44,20 +44,6 @@ if(process.env.NODE_ENV === "development") {
     });
 
     /**
-     * Delete token HTTP_POST mock response
-     */
-    mock.onPost(apiConfig.apis.logout.httpPOST)
-    .reply((req) => {
-        console.log(JSON.stringify({
-            timestamp: (new Date()).toString(),
-            url: req.url,
-            body: req.data,
-        }));
-
-        return [200, null];
-    });
-
-    /**
      *
      * Creators HTTP_GET mock responses
      */

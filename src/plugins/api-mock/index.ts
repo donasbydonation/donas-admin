@@ -131,11 +131,14 @@ if(process.env.NODE_ENV === "development") {
      */
     mock.onDelete(apiConfig.apis.schedules.httpDELETE.path.getRegex())
     .reply((req) => {
+        const scheduleId = parseInt(req.url?.split("/").pop() as string)
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
+            pathVariable: `scheduleId := ${scheduleId}`,
         }));
-        return [200, null];
+        return [200, scheduleId];
     });
 
     /**

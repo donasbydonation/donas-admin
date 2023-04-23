@@ -18,12 +18,10 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
         apiCall.registerSchedule({
             banner: (input("register-schedule-banner-image").files as FileList)[0],
             schedule: {
-                creator: {
-                    id: parseInt(input("register-schedule-creator").value),
-                },
-                name: input("register-schedule-name").value,
+                creatorId: parseInt(input("register-schedule-creator").value),
+                title: input("register-schedule-name").value,
                 description: input("register-schedule-description").value,
-                datetime: toISOString(input("register-schedule-date").value),
+                scheduledTime: toISOString(input("register-schedule-date").value),
             }
         }).then(() => {
             alert("추가되었습니다.");

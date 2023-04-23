@@ -75,7 +75,7 @@ if(process.env.NODE_ENV === "development") {
             url: req.url,
             auth: req.headers?.Authorization,
             formData: {
-                profile: `File.name: ${req.data.get("profile").name}`,
+                profile: `File.name := ${req.data.get("profile").name}`,
                 creatorInfo: req.data.get("creatorInfo"),
             }
         }));
@@ -117,8 +117,9 @@ if(process.env.NODE_ENV === "development") {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
             formData: {
-                banner: `File.name: ${req.data.get("banner").name}`,
+                banner: `File.name := ${req.data.get("banner").name}`,
                 schedule: req.data.get("schedule"),
             }
         }));

@@ -5,10 +5,10 @@ export const apiConfig = {
     baseURL: "https://donas.me",
     apis: {
         creators: {
-            httpGET: "/api/v1/creators",
+            httpGET: "/api/v1/creator-infos",
             httpPOST: "/api/v1/creator-infos",
             all: {
-                httpGET: "/api/v1/creator-info/all",
+                httpGET: "/api/v1/creator-infos/all",
             },
             httpDELETE: {
                 path: {
@@ -20,7 +20,7 @@ export const apiConfig = {
         },
         schedules: {
             httpGET: "/api/v1/schedules",
-            httpPOST: "/api/v1/schedule",
+            httpPOST: "/api/v1/schedules",
             httpDELETE: {
                 path: {
                     getString: (id: number) => (`/api/v1/schedule/${id}`),

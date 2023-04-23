@@ -86,7 +86,7 @@ if(process.env.NODE_ENV === "development") {
      * Schedules HTTP_GET mock responses
      */
     for (let i = 0; i < data.schedulePages.length; i++) {
-        mock.onGet(apiConfig.apis.schedules.httpGET, {params: {page: `${i + 1}`}})
+        mock.onGet(apiConfig.apis.schedules.httpGET, {params: {page: i, size: "10"}})
         .reply((req) => {
             console.log(JSON.stringify({
                 timestamp: (new Date()).toString(),

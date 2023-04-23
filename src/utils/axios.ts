@@ -41,10 +41,10 @@ export const apiConfig = {
             },
         },
         login: {
-            httpPOST: "/api/v1/login",
+            httpPOST: "/api/v1/admin/login",
         },
         refresh: {
-            httpPOST: "/api/v1/refresh",
+            httpPOST: "/api/v1/admin/refresh",
         },
     },
 };

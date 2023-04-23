@@ -141,7 +141,7 @@ if(process.env.NODE_ENV === "development") {
     /**
      * Schedule HTTP_PUT mock responses
      */
-    mock.onPut(apiConfig.apis.schedules.httpPUT.path.getRegex())
+    mock.onPut(apiConfig.apis.schedules.httpPUT)
     .reply((req) => {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),

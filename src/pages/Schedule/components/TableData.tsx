@@ -31,6 +31,7 @@ export function TableData(props: TableDataProps) {
                 show={modalShow}
                 handleClose={handleModalClose}
                 id={props.id}
+                creatorId={props.creator.id}
             />
             <tr>
                 <td>{props.id}</td>

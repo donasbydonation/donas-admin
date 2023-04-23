@@ -37,7 +37,7 @@ if(process.env.NODE_ENV === "development") {
         }));
 
         if (testing.refresh.authorizedForValidRefreshToken(req)) {
-            return [201, data.login.refresh];
+            return [200, data.login.refresh];
         } else {
             return [401, data.login.unauthorized];
         }

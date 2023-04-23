@@ -1,6 +1,17 @@
 import { axios, apiConfig }  from './axios';
-import { cookieConfig, getCookie, setCookie } from './cookie';
+import { getCookie, setCookie } from './cookie';
 import { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+
+// Cookie
+export const authConfig = {
+    cookies: {
+        names: {
+            accessToken: "access-token",
+            refreshToken: "refresh-token",
+            username: "username",
+        },
+    },
+};
 
 // API Call
 
@@ -20,13 +31,13 @@ export function getAccessToken(data: GetAccessTokenRequestDTO): Promise<GetAcces
 
 export function refreshAccessToken(config: AxiosRequestConfig) {
     return axios.post(apiConfig.apis.refresh.httpPOST, {
-        refreshToken: getCookie(cookieConfig.names.refreshToken),
-        username: getCookie(cookieConfig.names.username),
+        refreshToken: getCookie(authConfig.cookies.names.refreshToken),
+        username: getCookie(authConfig.cookies.names.username),
     }).then((res: unknown) => {
         // Effectively convert type
         const body = res as GetAccessTokenResponseDTO;
-        setCookie(cookieConfig.names.accessToken, body.accessToken);
-        setCookie(cookieConfig.names.refreshToken, body.refreshToken);
+        setCookie(authConfig.cookies.names.accessToken, body.accessToken);
+        setCookie(authConfig.cookies.names.refreshToken, body.refreshToken);
         return axios(config);
     });
 }
@@ -35,13 +46,21 @@ export function refreshAccessToken(config: AxiosRequestConfig) {
 
 export function isRefreshRequired(res: AxiosResponse): boolean {
     return (res.config.url !== apiConfig.apis.refresh.httpPOST) &&
-        !!getCookie(cookieConfig.names.refreshToken);
+        !!getCookie(authConfig.cookies.names.refreshToken);
 };
 
 export function setAuthorizationHeader(config: InternalAxiosRequestConfig) {
-    const token = getCookie(cookieConfig.names.accessToken);
+    const token = getCookie(authConfig.cookies.names.accessToken);
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
+}
+
+// Util func
+
+export function isAuth(): boolean {
+    return !!getCookie(authConfig.cookies.names.accessToken) &&
+        !!getCookie(authConfig.cookies.names.refreshToken) &&
+        !!getCookie(authConfig.cookies.names.username);
 }

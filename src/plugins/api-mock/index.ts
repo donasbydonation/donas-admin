@@ -48,7 +48,7 @@ if(process.env.NODE_ENV === "development") {
      * Creators HTTP_GET mock responses
      */
     for (let i = 0; i < data.creatorPages.length; i++) {
-        mock.onGet(apiConfig.apis.creators.httpGET, {params: {page: `${i + 1}`}})
+        mock.onGet(apiConfig.apis.creators.httpGET, {params: {page: i, size: "10"}})
         .reply((req) => {
             console.log(JSON.stringify({
                 timestamp: (new Date()).toString(),

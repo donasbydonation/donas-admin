@@ -16,8 +16,8 @@ export default function Creator() {
 
     const onPageChanged = () => {
         apiCall.getCreators(searchParams.get("page")).then(body => {
-            setPages(Array.from({length: body.totalPages}, (_, i) => i + 1));
-            setCreators(body.content);
+            setPages(Array.from({length: body.totalPage}, (_, i) => i + 1));
+            setCreators(body.creatorInfos.map(apiCall.creatorInfoShim));
         });
     };
 

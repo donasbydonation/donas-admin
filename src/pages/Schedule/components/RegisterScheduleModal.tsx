@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 import { toISOString } from '@/utils/datetime';
-import { CreatorInfoShort } from '@/types';
 
 export function RegisterScheduleModal(props: {show: boolean, handleClose: () => void}) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -32,7 +31,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
         });
     };
 
-    const [allCreators,setAllCreators] = useState<Array<CreatorInfoShort>>([]);
+    const [allCreators, setAllCreators] = useState<apiCall.GetAllCreatorsResponseDTO>([]);
     useEffect(() => {
         apiCall.getAllCreators().then(body => {
             setAllCreators(body);

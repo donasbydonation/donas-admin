@@ -105,6 +105,7 @@ if(process.env.NODE_ENV === "development") {
         console.log(JSON.stringify({
             timestamp: (new Date()).toString(),
             url: req.url,
+            auth: req.headers?.Authorization,
         }));
         return [200, data.allCreators];
     });

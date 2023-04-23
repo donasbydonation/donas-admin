@@ -1,8 +1,8 @@
-import { CreatorInfoShort } from './CreatorInfo';
+import { CreatorInfo } from './CreatorInfo';
 
 export type ScheduleInfo = {
     id: number,
-    creator: CreatorInfoShort,
+    creator: Partial<CreatorInfo>,
     bannerImage: string,
     name: string,
     description: string,

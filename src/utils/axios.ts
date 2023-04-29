@@ -3,7 +3,6 @@ import * as auth from './auth';
 import { removeCookie } from './cookie';
 
 export const apiConfig = {
-    baseURL: "https://donas.me",
     apis: {
         creators: {
             httpGET: "/api/v1/creator-infos",
@@ -24,8 +23,8 @@ export const apiConfig = {
             httpPOST: "/api/v1/schedules",
             httpDELETE: {
                 path: {
-                    getString: (id: number) => (`/api/v1/schedule/${id}`),
-                    getRegex: () => (/\/api\/v1\/schedule\/\d+/),
+                    getString: (id: number) => (`/api/v1/schedules/${id}`),
+                    getRegex: () => (/\/api\/v1\/schedules\/\d+/),
                 },
             },
             httpPUT: "/api/v1/schedules",
@@ -40,7 +39,6 @@ export const apiConfig = {
 };
 
 export const axios = Axios.create({
-    baseURL: apiConfig.baseURL,
     headers: {
         Accept: "application/json",
     },
@@ -53,8 +51,8 @@ axios.interceptors.response.use(
         return response.data;
     },
     (error) => {
-        const message = error.response.data?.message || error.message;
-        if (error.response.status === 401) {
+        const message = error.response?.data?.message || error.message;
+        if (error.response?.status === 401) {
             if (auth.isRefreshRequired(error.response)) {
                 return auth.refreshAccessToken(error.response.config);
             } else {

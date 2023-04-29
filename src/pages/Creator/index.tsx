@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ export default function Creator() {
     const [creators, setCreators] = useState<Array<CreatorInfo>>([]);
     const [pages, setPages] = useState<Array<number>>([]);
     const [searchParams] = useSearchParams();
+    const [updateCreatorsEventFlag, updateCreators] = useReducer(x => x + 1, 0);
 
     const onPageChanged = () => {
         apiCall.getCreators(searchParams.get("page")).then(body => {
@@ -24,7 +25,7 @@ export default function Creator() {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(onPageChanged, [searchParams]);
+    useEffect(onPageChanged, [searchParams, updateCreatorsEventFlag]);
 
     const [modalShow, setModalShow] = useState(false);
     const handleModalClose = () => setModalShow(false);
@@ -32,7 +33,11 @@ export default function Creator() {
 
     return (
         <>
-            <RegisterCreatorModal show={modalShow} handleClose={handleModalClose} />
+            <RegisterCreatorModal
+                show={modalShow}
+                handleClose={handleModalClose}
+                updateCreators={updateCreators}
+            />
             <Card.Body>
                 <Card.Title>크리에이터 관리</Card.Title>
                 <div className="mb-3 d-flex justify-content-between">
@@ -65,6 +70,7 @@ export default function Creator() {
                                 twitchURL={creator.twitchURL}
                                 africaURL={creator.africaURL}
                                 key={idx}
+                                updateCreators={updateCreators}
                             />
                         ))}
                     </tbody>

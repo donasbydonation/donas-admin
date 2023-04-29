@@ -1,7 +1,7 @@
 import { axios, apiConfig } from '@/utils/axios';
 
 type PlatformInfo = {
-    platform: "afreecatv"|"twitch"|"youtube",
+    platform: "afreeca"|"twitch"|"youtube",
     broadcastLink: string,
 };
 

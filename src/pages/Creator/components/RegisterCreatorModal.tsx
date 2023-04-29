@@ -20,7 +20,7 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
                 name: input("register-creator-name").value,
                 platforms: [
                     {
-                        platform : "afreecatv",
+                        platform : "afreeca",
                         broadcastLink: input("register-creator-africa-url").value,
                     },
                     {

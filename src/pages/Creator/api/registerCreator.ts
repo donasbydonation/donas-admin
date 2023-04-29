@@ -1,7 +1,7 @@
 import { axios, apiConfig } from '@/utils/axios';
 
 type PlatformInfo = {
-    platform: "afreecatv"|"twitch"|"youtube",
+    platform: "afreeca"|"twitch"|"youtube",
     broadcastLink: string,
 };
 
@@ -16,9 +16,10 @@ export type RegisterCreatorRequestDTO = {
 export type RegisterCreatorResponseDTO = null;
 
 export function registerCreator(body: RegisterCreatorRequestDTO): Promise<RegisterCreatorResponseDTO> {
-    const formData = new FormData();
-    formData.append("profile", body.profile);
-    formData.append("creatorInfo", JSON.stringify(body.creatorInfo));
+    const formData = {
+        profile: body.profile,
+        creatorInfo: new Blob([JSON.stringify(body.creatorInfo)], {type: "application/json"}),
+    };
 
     return axios.post(apiConfig.apis.creators.httpPOST, formData, {
         headers: {

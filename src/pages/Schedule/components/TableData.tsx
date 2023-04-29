@@ -6,7 +6,9 @@ import * as apiCall from '../api';
 import { ModifyScheduleModal } from '.';
 import { displayISOString } from '@/utils/datetime';
 
-export type TableDataProps = ScheduleInfo;
+type TableDataProps = ScheduleInfo&{
+    updateSchedules: () => void,
+};
 
 export function TableData(props: TableDataProps) {
     const onClickDelete: MouseEventHandler<HTMLElement> = (e) => {
@@ -15,6 +17,7 @@ export function TableData(props: TableDataProps) {
             apiCall.deleteSchedule(props.id)
             .then(() => {
                 alert("삭제되었습니다.");
+                props.updateSchedules();
             }).catch(() => {
                 alert("삭제에 실패하였습니다.");
             });
@@ -22,8 +25,8 @@ export function TableData(props: TableDataProps) {
     };
 
     const [modalShow, setModalShow] = useState(false);
-    const handleModalClose = () => setModalShow(false);
     const handleModalShow = () => setModalShow(true);
+    const handleModalClose = () => setModalShow(false);
 
     return (
         <>
@@ -32,6 +35,7 @@ export function TableData(props: TableDataProps) {
                 handleClose={handleModalClose}
                 id={props.id}
                 creatorId={props.creator.id as number}
+                updateSchedules={props.updateSchedules}
             />
             <tr>
                 <td>{props.id}</td>

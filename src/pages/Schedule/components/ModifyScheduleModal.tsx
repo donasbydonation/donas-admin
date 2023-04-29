@@ -7,12 +7,15 @@ import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 import { toISOString } from '@/utils/datetime';
 
-export function ModifyScheduleModal(props: {
+type ModifyScheduleModalProps = {
     show: boolean,
     handleClose: () => void,
     id: number,
     creatorId: number,
-}) {
+    updateSchedules: () => void,
+};
+
+export function ModifyScheduleModal(props: ModifyScheduleModalProps) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         props.handleClose();
@@ -33,6 +36,7 @@ export function ModifyScheduleModal(props: {
             },
         ).then(() => {
             alert("수정되었습니다.");
+            props.updateSchedules();
         }).catch(() => {
             alert("수정에 실패하였습니다.");
         }).finally(() => {

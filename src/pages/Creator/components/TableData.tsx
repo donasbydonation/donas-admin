@@ -5,7 +5,9 @@ import * as apiCall from '../api';
 import { ModifyCreatorModal } from '.';
 import { CreatorInfo } from '@/types';
 
-export type TableDataProps = CreatorInfo;
+export type TableDataProps = CreatorInfo&{
+    updateCreators: () => void,
+};
 
 export function TableData(props: TableDataProps) {
     const onClickDelete: MouseEventHandler<HTMLElement> = (e) => {
@@ -14,6 +16,7 @@ export function TableData(props: TableDataProps) {
             apiCall.deleteCreator(props.id)
             .then(() => {
                 alert("삭제되었습니다.");
+                props.updateCreators();
             }).catch(() => {
                 alert("삭제에 실패하였습니다.");
             });
@@ -21,8 +24,8 @@ export function TableData(props: TableDataProps) {
     };
 
     const [modalShow, setModalShow] = useState(false);
-    const handleModalClose = () => setModalShow(false);
     const handleModalShow = () => setModalShow(true);
+    const handleModalClose = () => setModalShow(false);
 
     return (
         <>
@@ -30,6 +33,7 @@ export function TableData(props: TableDataProps) {
                 show={modalShow}
                 handleClose={handleModalClose}
                 id={props.id}
+                updateCreators={props.updateCreators}
             />
             <tr>
                 <td>{props.id}</td>

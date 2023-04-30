@@ -1,8 +1,8 @@
 FROM node:lts-alpine AS base
 
-# -------------------------
+#
 # Dependencies
-# -------------------------
+#
 FROM base AS deps
 
 WORKDIR /app
@@ -18,9 +18,9 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# -------------------------
+#
 # Build results
-# -------------------------
+#
 FROM base AS builder
 
 WORKDIR /app
@@ -30,12 +30,17 @@ COPY . .
 
 RUN yarn build
 
-# -------------------------
+#
 # Image
-# -------------------------
+#
 FROM nginx:stable-alpine3.17-slim
 
 COPY default.conf.template /etc/nginx/templates/
 COPY --from=builder /app/build /usr/share/nginx/html
 
+# Default envs
+ENV APP_API_HOST=localhost
+ENV APP_API_PORT=80
 ENV APP_ADM_CONTAINER_PORT=8000
+
+EXPOSE 8000

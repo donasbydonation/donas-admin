@@ -13,9 +13,10 @@ export type RegisterScheduleRequestDTO = {
 export type RegisterScheduleResponseDTO = null;
 
 export function registerSchedule(body: RegisterScheduleRequestDTO): Promise<RegisterScheduleResponseDTO> {
-    const formData = new FormData();
-    formData.append("banner", body.banner);
-    formData.append("schedule", JSON.stringify(body.schedule));
+    const formData = {
+        banner: body.banner,
+        schedule: new Blob([JSON.stringify(body.schedule)], {type: "application/json"}),
+    };
 
     return axios.post(apiConfig.apis.schedules.httpPOST, formData, {
         headers: {

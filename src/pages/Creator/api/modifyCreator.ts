@@ -1,7 +1,7 @@
 import { axios, apiConfig } from '@/utils/axios';
 
 type PlatformInfo = {
-    platform: "afreecatv"|"twitch"|"youtube",
+    platform: "afreeca"|"twitch"|"youtube",
     broadcastLink: string,
 };
 
@@ -17,9 +17,10 @@ export type ModifyCreatorRequestDTO = {
 export type ModifyCreatorResponseDTO = number;
 
 export function modifyCreator(body: ModifyCreatorRequestDTO): Promise<ModifyCreatorResponseDTO> {
-    const formData = new FormData();
-    formData.append("profile", body.profile);
-    formData.append("creatorInfo", JSON.stringify(body.creatorInfo));
+    const formData = {
+        profile: body.profile,
+        creatorInfo: new Blob([JSON.stringify(body.creatorInfo)], {type: "application/json"}),
+    };
 
     return axios.put(apiConfig.apis.creators.httpPUT, formData, {
         headers: {

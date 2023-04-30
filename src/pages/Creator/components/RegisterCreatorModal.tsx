@@ -1,11 +1,20 @@
 import { MouseEventHandler } from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 
-export function RegisterCreatorModal(props: {show: boolean, handleClose: () => void}) {
+type RegisterCreatorModalProps = {
+    show: boolean,
+    handleClose: () => void,
+    updateCreators: () => void,
+};
+
+export function RegisterCreatorModal(props: RegisterCreatorModalProps) {
+    const navigate = useNavigate();
+
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         props.handleClose();
@@ -20,7 +29,7 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
                 name: input("register-creator-name").value,
                 platforms: [
                     {
-                        platform : "afreecatv",
+                        platform : "afreeca",
                         broadcastLink: input("register-creator-africa-url").value,
                     },
                     {
@@ -35,10 +44,12 @@ export function RegisterCreatorModal(props: {show: boolean, handleClose: () => v
             },
         }).then(() => {
             alert("등록되었습니다.");
+            props.updateCreators();
         }).catch((err) => {
             alert("등록에 실패하였습니다.");
         }).finally(() => {
             props.handleClose();
+            navigate(0);
         });
     };
 

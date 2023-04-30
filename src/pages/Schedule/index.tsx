@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ export default function Schedule() {
     const [schedules, setSchedules] = useState<Array<ScheduleInfo>>([]);
     const [pages, setPages] = useState<Array<number>>([]);
     const [searchParams] = useSearchParams();
+    const [updateSchedulesEventFlag, updateSchedules] = useReducer(x => x + 1, 0);
 
     const onPageChanged = () => {
         apiCall.getSchedules(searchParams.get("page")).then(body => {
@@ -24,15 +25,19 @@ export default function Schedule() {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(onPageChanged, [searchParams]);
+    useEffect(onPageChanged, [searchParams, updateSchedulesEventFlag]);
 
     const [modalShow, setModalShow] = useState(false);
-    const handleModalClose = () => setModalShow(false);
     const handleModalShow = () => setModalShow(true);
+    const handleModalClose = () => setModalShow(false);
 
     return (
         <>
-            <RegisterScheduleModal show={modalShow} handleClose={handleModalClose} />
+            <RegisterScheduleModal
+                show={modalShow}
+                handleClose={handleModalClose}
+                updateSchedules={updateSchedules}
+            />
             <Card.Body>
                 <Card.Title>방송 스케줄 관리</Card.Title>
                 <div className="mb-3 d-flex justify-content-between">
@@ -65,6 +70,7 @@ export default function Schedule() {
                                 description={schedule.description}
                                 datetime={schedule.datetime}
                                 key={idx}
+                                updateSchedules={updateSchedules}
                             />
                         ))}
                     </tbody>

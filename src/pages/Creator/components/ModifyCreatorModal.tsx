@@ -6,11 +6,14 @@ import Alert from 'react-bootstrap/Alert';
 import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 
-export function ModifyCreatorModal(props: {
+type ModifyCreatorModalProps = {
     show: boolean,
     handleClose: () => void,
-    id: number
-}) {
+    id: number,
+    updateCreators: () => void,
+};
+
+export function ModifyCreatorModal(props: ModifyCreatorModalProps) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         props.handleClose();
@@ -26,7 +29,7 @@ export function ModifyCreatorModal(props: {
                     name: input("modify-creator-name").value,
                     platforms: [
                         {
-                            platform : "afreecatv",
+                            platform : "afreeca",
                             broadcastLink: input("modify-creator-africa-url").value,
                         },
                         {
@@ -42,6 +45,7 @@ export function ModifyCreatorModal(props: {
             },
         ).then(() => {
             alert("수정되었습니다.");
+            props.updateCreators();
         }).catch(() => {
             alert("수정에 실패하였습니다.");
         }).finally(() => {

@@ -6,7 +6,13 @@ import * as apiCall from '../api';
 import { input } from '@/utils/getElementById';
 import { toISOString } from '@/utils/datetime';
 
-export function RegisterScheduleModal(props: {show: boolean, handleClose: () => void}) {
+type RegisterScheduleModalProps = {
+    show: boolean,
+    handleClose: () => void,
+    updateSchedules: () => void,
+};
+
+export function RegisterScheduleModal(props: RegisterScheduleModalProps) {
     const onCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         props.handleClose();
@@ -24,6 +30,7 @@ export function RegisterScheduleModal(props: {show: boolean, handleClose: () => 
             }
         }).then(() => {
             alert("추가되었습니다.");
+            props.updateSchedules();
         }).catch(() => {
             alert("추가 실패하였습니다.");
         }).finally(() => {

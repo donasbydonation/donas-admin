@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useState, MouseEventHandler } from 'react';
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
@@ -5,6 +6,10 @@ import { ScheduleInfo } from '@/types';
 import * as apiCall from '../api';
 import { ModifyScheduleModal } from '.';
 import { displayISOString } from '@/utils/datetime';
+
+const Td = styled.td`
+    overflow-wrap: anywhere;
+`;
 
 type TableDataProps = ScheduleInfo&{
     updateSchedules: () => void,
@@ -38,8 +43,8 @@ export function TableData(props: TableDataProps) {
                 updateSchedules={props.updateSchedules}
             />
             <tr>
-                <td>{props.id}</td>
-                <td>{props.creator.name}</td>
+                <Td>{props.id}</Td>
+                <Td>{props.creator.name}</Td>
                 <td>
                     <Image
                         src={props.bannerImage}
@@ -48,9 +53,9 @@ export function TableData(props: TableDataProps) {
                         rounded
                     />
                 </td>
-                <td>{props.name}</td>
-                <td>{props.description}</td>
-                <td>{displayISOString(props.datetime)}</td>
+                <Td>{props.name}</Td>
+                <Td>{props.description}</Td>
+                <Td>{displayISOString(props.datetime)}</Td>
                 <td>
                     <Button variant="outline-success" size="sm" onClick={handleModalShow}>
                         수정

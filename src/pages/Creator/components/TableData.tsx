@@ -1,9 +1,14 @@
+import styled from 'styled-components';
 import { useState, MouseEventHandler } from 'react';
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import * as apiCall from '../api';
 import { ModifyCreatorModal } from '.';
 import { CreatorInfo } from '@/types';
+
+const Td = styled.td`
+    overflow-wrap: anywhere;
+`;
 
 export type TableDataProps = CreatorInfo&{
     updateCreators: () => void,
@@ -36,7 +41,7 @@ export function TableData(props: TableDataProps) {
                 updateCreators={props.updateCreators}
             />
             <tr>
-                <td>{props.id}</td>
+                <Td>{props.id}</Td>
                 <td>
                     <Image
                         src={props.profileImage}
@@ -45,22 +50,22 @@ export function TableData(props: TableDataProps) {
                         roundedCircle
                     />
                 </td>
-                <td>{props.name}</td>
-                <td>
+                <Td>{props.name}</Td>
+                <Td>
                     <a href={props.youtubeURL} target="_blank" rel="noreferrer">
                         {props.youtubeURL}
                     </a>
-                </td>
-                <td>
+                </Td>
+                <Td>
                     <a href={props.twitchURL} target="_blank" rel="noreferrer">
                         {props.twitchURL}
                      </a>
-                </td>
-                <td>
+                </Td>
+                <Td>
                     <a href={props.africaURL} target="_blank" rel="noreferrer">
                         {props.africaURL}
                     </a>
-                </td>
+                </Td>
                 <td>
                     <Button variant="outline-success" size="sm" onClick={handleModalShow}>
                         수정

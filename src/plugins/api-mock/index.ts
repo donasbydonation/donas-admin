@@ -128,6 +128,22 @@ if(process.env.NODE_ENV === "development") {
     });
 
     /**
+     * Schedule HTTP_POST mock responses
+     */
+    mock.onPost(apiConfig.apis.schedules.excel.httpPOST)
+    .reply((req) => {
+        console.log(JSON.stringify({
+            timestamp: (new Date()).toString(),
+            url: req.url,
+            auth: req.headers?.Authorization,
+            formData: {
+                excel: `File.name := ${req.data.get("excel").name}`,
+            }
+        }));
+        return [201, null];
+    });
+
+    /**
      * Schedule HTTP_DELETE mock response
      */
     mock.onDelete(apiConfig.apis.schedules.httpDELETE.path.getRegex())

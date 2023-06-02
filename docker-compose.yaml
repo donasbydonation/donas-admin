@@ -9,7 +9,7 @@ services:
     networks:
       - develop-environment
     environment:
-      - "APP_API_HOST=server"
+      - "APP_API_HOST=back-end"
       - "APP_API_PORT=8080"
       - "APP_ADM_CONTAINER_PORT=8000"
 

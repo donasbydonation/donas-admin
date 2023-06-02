@@ -28,6 +28,9 @@ export const apiConfig = {
                 },
             },
             httpPUT: "/api/v1/schedules",
+            excel: {
+                httpPOST: "/api/v2/schedules/excel",
+            },
         },
         login: {
             httpPOST: "/api/v1/admin/login",

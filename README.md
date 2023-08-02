@@ -1,5 +1,7 @@
 # Donas Admin
 
+> End-Of-Service Notice: The Donas project officially closed on July 4, 2023.
+
 ## Feature proposal (Updated May 1, 2023)
 
 - Log-in with pre-defined admin credential

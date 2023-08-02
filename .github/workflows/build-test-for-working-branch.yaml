@@ -1,12 +1,14 @@
 name: Build testing for working branch
 
-on:
-  push:
-    branches:
-      - "feat/**"
-      - "fix/**"
-      - "refactor/**"
-      - "chore/**"
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches:
+#       - "feat/**"
+#       - "fix/**"
+#       - "refactor/**"
+#       - "chore/**"
 
 jobs:
   build-test:

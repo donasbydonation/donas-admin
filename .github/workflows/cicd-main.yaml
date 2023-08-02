@@ -1,9 +1,11 @@
 name: CICD for main branch
 
-on:
-  push:
-    branches:
-      - "main"
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches:
+#       - "main"
 
 env:
   APP_COMPONENT_NAME: "admin-console"

@@ -1,9 +1,11 @@
 name: CI for develop branch
 
-on:
-  push:
-    branches:
-      - "develop"
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches:
+#       - "develop"
 
 env:
   APP_COMPONENT_NAME: "admin-console"
